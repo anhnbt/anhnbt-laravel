@@ -4,21 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Rank extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'posts';
-
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'id';
+    protected $table = 'ranks';
 
     public function user()
     {

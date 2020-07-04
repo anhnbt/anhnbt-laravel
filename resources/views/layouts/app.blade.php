@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/post">{{ __('Bài viết') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/rank">{{ __('Rank') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

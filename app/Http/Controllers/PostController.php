@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index', 'show');
     }
     
     /**
@@ -93,6 +93,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        if (Auth::id() !== $post->user_id) {
+            return redirect('post')->with('error', 'Unauthorized page.');
+        }
         return view('post.edit', ['post' => $post]);
     }
 
@@ -111,7 +114,7 @@ class PostController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('post/create')
+            return redirect()->route('post.edit', $id)
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -134,7 +137,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id)->delete();
+        $post = Post::findOrFail($id);
+        if (Auth::id() !== $post->user_id) {
+            return redirect('post')->with('error', 'Unauthorized page.');
+        }
+        $post->delete();
         return redirect('post')->with('success', 'Record deleted successfully.');
     }
 }

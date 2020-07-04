@@ -2,7 +2,7 @@
 
 @section('title', 'Chỉnh sửa bài viết')
 @section('content')
-    <h1>Chỉnh sửa bài viết</h1>
+    <h1>{{ __('Chỉnh sửa bài viết') }}</h1>
     {!! Form::open(['action' => ['PostController@update', $post->id], 'method' => 'POST']) !!}
     <div class="form-group">
         {{ Form::label('title', 'Tiêu đề') }}
