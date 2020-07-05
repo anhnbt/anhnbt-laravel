@@ -102,7 +102,7 @@ class RankController extends Controller
      */
     public function show($id)
     {
-        $rank = Rank::find($id);
+        $rank = Rank::findOrFail($id);
         return view('rank.show', ['rank' => $rank]);
     }
 
@@ -114,7 +114,7 @@ class RankController extends Controller
      */
     public function edit($id)
     {
-        $rank = Rank::find($id);
+        $rank = Rank::findOrFail($id);
         return view('rank.edit', ['rank' => $rank]);
     }
 
@@ -154,7 +154,7 @@ class RankController extends Controller
             );
         }
 
-        $rank = Rank::find($id);
+        $rank = Rank::findOrFail($id);
         $rank->user_id = Auth::id();
         $rank->name = $request->input('name');
         $rank->price = $request->input('price');

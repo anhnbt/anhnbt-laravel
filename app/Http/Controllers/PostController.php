@@ -80,7 +80,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         return view('post.show', ['post' => $post]);
     }
 
@@ -92,7 +92,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         if (Auth::id() !== $post->user_id) {
             return redirect('post')->with('error', 'Unauthorized page.');
         }

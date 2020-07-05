@@ -23,7 +23,7 @@ class CreateRanksTable extends Migration
             $table->decimal('total_price', 8, 2);
             $table->tinyInteger('estimated_completion_time');
             $table->tinyInteger('total_estimated_completion_time');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
     }
