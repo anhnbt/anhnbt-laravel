@@ -4,26 +4,29 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            {{ __('Bài viết') }} <a href="/post/create" class="btn btn-primary btn-sm">Viết bài mới</a>
+            {{ __('Bài viết') }} <a href="{{ route('post.create') }}" class="btn btn-primary btn-sm"><i class="fas fa-plus-circle"></i> Viết bài mới</a>
         </div>
         <div class="card-body">
         @if (count($posts) > 0)
-            <table class="table mb-2">
+            <table class="table table-striped table-bordered mb-2">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tiêu đề</th>
-                        <th scope="col">Thời gian</th>
-                        <th scope="col">Thao tác</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col" colspan="2" class="text-center">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach ($posts as $post)
                     <tr>
-                        <th scope="row">{{ $post->id }}</th>
-                        <td><a href="/post/{{ $post->id }}">{{ $post->title }}</a></td>
+                        <th scope="row" class="text-center">{{ $post->id }}</th>
+                        <td><a href="{{ route('post.show', $post->id) }}" class="font-weight-bold">{{ $post->title }}</a></td>
                         <td>{{ $post->created_at }}</td>
-                        <td><a href="/post/{{ $post->id }}/edit" class="btn btn-secondary btn-sm">Chỉnh sửa</a></td>
+                        <td class="text-center">
+                            <a href="{{ route('post.show', $post->id) }}" class="btn btn-secondary btn-sm mr-2"><i class="far fa-eye"></i></a>
+                            <a href="{{ route('post.edit', $post->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

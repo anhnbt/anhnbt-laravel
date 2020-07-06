@@ -29,7 +29,7 @@ class PostController extends Controller
     public function index()
     {
         // $posts = Post::orderBy('id', 'desc')->get();
-        $posts = DB::table('posts')->orderBy('id', 'desc')->paginate(2);
+        $posts = DB::table('posts')->orderBy('id', 'desc')->paginate(10);
         return view('post.index', ['posts' => $posts]);
     }
 
@@ -57,7 +57,7 @@ class PostController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('post/create')
+            return redirect()->route('post.create')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -69,7 +69,7 @@ class PostController extends Controller
         $post->body = $request->input('body');
         $post->save();
 
-        return redirect('post')->with('success', 'New record created successfully.');
+        return redirect()->route('post.create')->with('success', 'New record created successfully.');
     }
 
     /**
@@ -94,7 +94,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         if (Auth::id() !== $post->user_id) {
-            return redirect('post')->with('error', 'Unauthorized page.');
+            return redirect()->route('post.index')->with('error', 'Unauthorized page.');
         }
         return view('post.edit', ['post' => $post]);
     }
@@ -109,7 +109,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|max:255',
             'body' => 'required',
         ]);
 
@@ -126,7 +126,7 @@ class PostController extends Controller
         $post->body = $request->input('body');
         $post->save();
 
-        return redirect('post')->with('success', 'Record updated successfully.');
+        return redirect()->route('post.edit', $id)->with('success', 'Record updated successfully.');
     }
 
     /**
@@ -139,9 +139,9 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         if (Auth::id() !== $post->user_id) {
-            return redirect('post')->with('error', 'Unauthorized page.');
+            return redirect()->route('post.index')->with('error', 'Unauthorized page.');
         }
         $post->delete();
-        return redirect('post')->with('success', 'Record deleted successfully.');
+        return redirect()->route('post.index')->with('success', 'Record deleted successfully.');
     }
 }

@@ -4,7 +4,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            {{ __('Rank') }} <a href="/rank/create" class="btn btn-primary btn-sm">Thêm bậc rank</a>
+            {{ __('Rank') }} <a href="{{ route('rank.create') }}" class="btn btn-primary btn-sm"><i class="fas fa-plus-circle"></i> Thêm bậc rank</a>
         </div>
         <div class="card-body">
         @if(count($ranks) > 0)
@@ -15,17 +15,20 @@
                     <th scope="col">Giá</th>
                     <th scope="col">Thời gian hoàn thành dự kiến</th>
                     <th scope="col">Ngày tạo</th>
-                    <th scope="col">Thao tác</th>
+                    <th scope="col" class="text-center">Thao tác</th>
                 </thead>
                 <tbody>
                 @foreach ($ranks as $rank)
                     <tr>
                         <th scope="col">{{ $rank->id }}</th>
-                        <td><a href="/rank/{{ $rank->id }}">{{ $rank->name }}</a></td>
+                        <td><a href="{{ route('rank.show', $rank->id) }}" class="font-weight-bold">{{ $rank->name }}</a></td>
                         <td>{{ number_format($rank->price, 2) }} ₫</td>
                         <td>{{ $rank->estimated_completion_time }} Giờ</td>
                         <td>{{ $rank->created_at }}</td>
-                        <td><a href="/rank/{{ $rank->id }}" class="btn btn-secondary btn-sm">Xem</a>&nbsp;<a href="/rank/{{ $rank->id }}/edit" class="btn btn-primary btn-sm">Chỉnh sửa</a></td>
+                        <td class="text-center">
+                            <a href="{{ route('rank.show', $rank->id) }}" class="btn btn-secondary btn-sm mr-2"><i class="far fa-eye"></i></a>
+                            <a href="{{ route('rank.edit', $rank->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

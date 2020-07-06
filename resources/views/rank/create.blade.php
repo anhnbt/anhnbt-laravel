@@ -10,7 +10,7 @@
             {!! Form::open(['action' => 'RankController@store', 'method' => 'POST', 'files' => true]) !!}
             <div class="form-group">
                 {{ Form::label('name', 'Bậc Rank') }}
-                {{ Form::select('name', ['Đồng' => 'Đồng', 'Bạc' => 'Bạc', 'Vàng' => 'Vàng'], '1', ['class' => 'form-control', 'placeholder' => 'Chọn mức Rank']) }}
+                {{ Form::select('name', ['Đồng' => 'Đồng', 'Bạc' => 'Bạc', 'Vàng' => 'Vàng', 'Bạch Kim' => 'Bạch Kim', 'Kim Cương' => 'Kim Cương', 'Tinh Anh' => 'Tinh Anh', 'Cao Thủ' => 'Cao Thủ'], '1', ['class' => 'form-control', 'placeholder' => 'Chọn mức Rank']) }}
             </div>
             <div class="form-group">
                 {{ Form::label('price', 'Giá') }}
@@ -36,7 +36,14 @@
                 {{ Form::label('thumbnail', 'Ảnh thumbnail') }}
                 {{ Form::file('thumbnail', ['class' => 'form-control']) }}
             </div>
-            {{ Form::submit('Đăng', ['class' => 'btn btn-primary']) }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ Form::submit('Đăng', ['class' => 'btn btn-primary btn-lg btn-block']) }}
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ route('rank.index') }}" class="btn btn-secondary btn-lg btn-block"><i class="far fa-times-circle"></i> Hủy</a>
+                </div>
+            </div>
             {!! Form::close() !!}
         </div>
     </div>

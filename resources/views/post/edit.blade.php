@@ -22,7 +22,14 @@
             </div>
         
             {{ Form::hidden('_method', 'PUT') }}
-            {{ Form::submit('Lưu thay đổi', ['class' => 'btn btn-primary']) }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ Form::submit('Lưu thay đổi', ['class' => 'btn btn-primary btn-lg btn-block']) }}
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ route('post.index') }}" class="btn btn-secondary btn-lg btn-block"><i class="far fa-times-circle"></i> Hủy</a>
+                </div>
+            </div>
             {!! Form::close() !!}
         </div>
     </div>

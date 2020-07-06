@@ -18,7 +18,14 @@
                 {{ Form::label('body', 'Nội dung') }}
                 {{ Form::textarea('body', '', ['class' => 'form-control', 'placeholder' => '']) }}
             </div>
-            {{ Form::submit('Đăng', ['class' => 'btn btn-primary']) }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ Form::submit('Đăng', ['class' => 'btn btn-primary btn-lg btn-block']) }}
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ route('post.index') }}" class="btn btn-secondary btn-lg btn-block"><i class="far fa-times-circle"></i> Hủy</a>
+                </div>
+            </div>
             {!! Form::close() !!}
         </div>
     </div>

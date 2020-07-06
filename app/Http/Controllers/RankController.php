@@ -29,7 +29,7 @@ class RankController extends Controller
      */
     public function index()
     {
-        $ranks = DB::table('ranks')->orderBy('id', 'desc')->paginate(5);
+        $ranks = DB::table('ranks')->orderBy('id', 'desc')->paginate(10);
         return view('rank.index', ['ranks' => $ranks]);
     }
 
