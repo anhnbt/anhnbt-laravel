@@ -24,6 +24,8 @@ Route::get('/services', 'PageController@services');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('post', 'PostController');
-Route::resource('rank', 'RankController');
-Route::resource('user', 'UserController');
+Route::resources([
+    'posts' => 'PostController',
+    'ranks' => 'RankController',
+    'users' => 'UserController',
+]);

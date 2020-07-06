@@ -13,7 +13,7 @@
                     @auth
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="{{ route('post.edit', $post->id) }}" class="btn btn-secondary btn-lg btn-block"><i class="far fa-edit"></i> Edit</a>
+                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-lg btn-block"><i class="far fa-edit"></i> {{ __('Edit') }}</a>
                         </div>
                         <div class="col-md-6">
                             {!! Form::open(['action' => ['PostController@destroy', $post->id], 'method' => 'POST', 'class' => '']) !!}
@@ -25,7 +25,7 @@
                     @endauth
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Last updated {{ $post->updated_at }}</small>
+                    <small class="text-muted">{{ __('Last updated') }} {{ $post->updated_at }}</small>
                 </div>
             </div><!-- .card -->
         </div><!-- .col-md-12 -->

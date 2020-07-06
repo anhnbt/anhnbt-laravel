@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('auth');
     }
     
     /**
@@ -80,8 +80,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-        return view('post.show', ['post' => $post]);
+        return view('post.show', ['post' => Post::findOrFail($id)]);
     }
 
     /**
@@ -119,7 +118,7 @@ class PostController extends Controller
                         ->withInput();
         }
 
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         $post->user_id = Auth::id();
         $post->title = $request->input('title');
         $post->description = $request->input('description');

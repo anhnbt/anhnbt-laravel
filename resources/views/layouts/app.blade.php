@@ -34,14 +34,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item{{ Request::is('user') ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('user.index') }}">{{ __('Thành viên') }}</a>
+                        <li class="nav-item{{ Request::is('users') ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('users.index') }}">{{ __('Thành viên') }}</a>
                         </li>
-                        <li class="nav-item{{ Request::is('post') ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('post.index') }}">{{ __('Bài viết') }}</a>
+                        <li class="nav-item{{ Request::is('posts') ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('posts.index') }}">{{ __('Bài viết') }}</a>
                         </li>
-                        <li class="nav-item{{ Request::is('rank') ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('rank.index') }}">{{ __('Rank') }}</a>
+                        <li class="nav-item{{ Request::is('ranks') ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('ranks.index') }}">{{ __('Rank') }}</a>
                         </li>
                     </ul>
 

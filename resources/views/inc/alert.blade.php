@@ -1,7 +1,7 @@
 @if ($errors->any())
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="alert alert-danger" role="alert">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -15,7 +15,7 @@
 @if (session('success'))
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
             </div>
@@ -27,7 +27,7 @@
 @if (session('error'))
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="alert alert-danger" role="alert">
                 {{ session('error') }}
             </div>
