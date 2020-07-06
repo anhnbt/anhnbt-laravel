@@ -10,7 +10,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    {{ __('Dashboard') }} <a href="{{ route('post.create') }}" class="btn btn-primary btn-sm">Viết bài mới</a>
+                    {{ __('Dashboard') }} <a href="{{ route('post.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Viết bài mới</a>
                 </div>
                 <div class="card-body">
                     @if (session('status'))
@@ -19,7 +19,7 @@
                         </div>
                     @endif
                     @if(count($posts) > 0)
-                    <table class="table table-striped">
+                    <table class="table">
                         <thead class="thead-light">
                             <th scope="col">#</th>
                             <th scope="col">Tiêu đề</th>
@@ -33,8 +33,8 @@
                                 <td><a href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a></td>
                                 <td>{{ $post->created_at }}</td>
                                 <td>
-                                    <a href="{{ route('post.show', $post->id) }}" class="btn btn-secondary btn-sm">Xem</a>
-                                    <a href="{{ route('post.edit', $post->id) }}" class="btn btn-info text-white btn-sm">Chỉnh sửa</a>
+                                    <a href="{{ route('post.show', $post->id) }}" class="btn btn-secondary btn-sm"><i class="far fa-eye"></i></a>
+                                    <a href="{{ route('post.edit', $post->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -43,9 +43,9 @@
                     @else
                         <div class="alert alert-info" role="alert">No data found.</div>
                     @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                </div><!-- .card-body -->
+            </div><!-- .card -->
+        </div><!-- col-md-12 -->
+    </div><!-- .row -->
+</div><!-- .container -->
 @endsection

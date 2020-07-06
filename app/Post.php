@@ -22,6 +22,8 @@ class Post extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'foreign_key', 'id');
+        return $this->belongsTo('App\User')->withDefault(function ($user, $post) {
+            $user->name = 'Guest Author';
+        });
     }
 }
