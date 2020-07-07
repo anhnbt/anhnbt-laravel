@@ -5,12 +5,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @auth('admin')
             <div class="alert alert-info" role="alert">
                 Xin chào <strong>{{ Auth::user()->name }}</strong>! Bạn đã đăng nhập vào khu vực Quản trị!
             </div>
+            @endauth
             <div class="card">
                 <div class="card-header">
-                    {{ __('Dashboard') }} <a href="{{ route('post.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Viết bài mới</a>
+                    {{ __('Dashboard') }} <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Viết bài mới</a>
                 </div>
                 <div class="card-body">
                     @if (session('status'))
@@ -30,11 +32,11 @@
                             @foreach ($posts as $post)
                             <tr>
                                 <th scope="col">{{ $post->id }}</td>
-                                <td><a href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a></td>
+                                <td><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></td>
                                 <td>{{ $post->created_at }}</td>
                                 <td>
-                                    <a href="{{ route('post.show', $post->id) }}" class="btn btn-secondary btn-sm"><i class="far fa-eye"></i></a>
-                                    <a href="{{ route('post.edit', $post->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
+                                    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-secondary btn-sm"><i class="far fa-eye"></i></a>
+                                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
                                 </td>
                             </tr>
                             @endforeach

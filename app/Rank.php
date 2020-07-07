@@ -13,8 +13,19 @@ class Rank extends Model
      */
     protected $table = 'ranks';
 
+    protected $fillable = [
+        'name', 'price', 'old_price', 'total_price', 'estimated_completion_time', 'total_estimated_completion_time', 'thumbnail',
+    ];
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
     public function user()
     {
-        return $this->belongsTo('App\User', 'foreign_key', 'id');
+        return $this->belongsTo('App\User', 'foreign_key');
     }
 }

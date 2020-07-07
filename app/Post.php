@@ -14,6 +14,15 @@ class Post extends Model
     protected $table = 'posts';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'slug', 'description', 'body', 'thumbnail',
+    ];
+
+    /**
      * The primary key associated with the table.
      *
      * @var string
@@ -22,7 +31,7 @@ class Post extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User')->withDefault(function ($user, $post) {
+        return $this->belongsTo('App\User', 'foreign_key')->withDefault(function ($user, $post) {
             $user->name = 'Guest Author';
         });
     }

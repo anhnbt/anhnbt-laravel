@@ -18,9 +18,9 @@ class CreateRanksTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
-            $table->decimal('price', 8, 2);
-            $table->decimal('old_price', 8, 2);
-            $table->decimal('total_price', 8, 2);
+            $table->string('price');
+            $table->string('old_price');
+            $table->string('total_price');
             $table->tinyInteger('estimated_completion_time');
             $table->tinyInteger('total_estimated_completion_time');
             $table->string('thumbnail')->nullable();

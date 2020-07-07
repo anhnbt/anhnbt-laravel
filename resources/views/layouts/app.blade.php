@@ -34,13 +34,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item{{ Request::is('users') ? ' active' : '' }}">
+                        <li class="nav-item{{ Request::is('admin/users*') ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('users.index') }}">{{ __('Thành viên') }}</a>
                         </li>
-                        <li class="nav-item{{ Request::is('posts') ? ' active' : '' }}">
+                        <li class="nav-item{{ Request::is('admin/posts*') ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('posts.index') }}">{{ __('Bài viết') }}</a>
                         </li>
-                        <li class="nav-item{{ Request::is('ranks') ? ' active' : '' }}">
+                        <li class="nav-item{{ Request::is('admin/ranks*') ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('ranks.index') }}">{{ __('Rank') }}</a>
                         </li>
                     </ul>

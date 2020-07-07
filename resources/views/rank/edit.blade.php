@@ -1,52 +1,112 @@
 @extends('layouts.app')
 
-@section('title', 'Sửa Giá')
+@section('title', 'Thêm Giá')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Sửa Giá') }}</div>
+                <div class="card-header">{{ __('Thêm Giá') }}</div>
+
                 <div class="card-body">
-                    {!! Form::open(['action' => ['RankController@update', $rank->id], 'method' => 'POST', 'files' => true]) !!}
-                    <div class="form-group">
-                        {{ Form::label('name', 'Bậc Rank') }}
-                        {{ Form::select('name', ['Đồng' => 'Đồng', 'Bạc' => 'Bạc', 'Vàng' => 'Vàng'], '1', ['class' => 'form-control', 'placeholder' => 'Chọn mức Rank']) }}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::label('price', 'Giá') }}
-                        {{ Form::number('price', $rank->price, ['class' => 'form-control', 'placeholder' => '']) }}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::label('old_price', 'Giá cũ') }}
-                        {{ Form::number('old_price', $rank->old_price, ['class' => 'form-control', 'placeholder' => '']) }}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::label('total_price', 'Tổng') }}
-                        {{ Form::number('total_price', $rank->total_price, ['class' => 'form-control', 'placeholder' => '']) }}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::label('estimated_completion_time', 'Thời gian hoàn thành dự kiến') }}
-                        {{ Form::number('estimated_completion_time', $rank->estimated_completion_time, ['class' => 'form-control', 'placeholder' => '']) }}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::label('total_estimated_completion_time', 'Tổng thời gian hoàn thành dự kiến') }}
-                        {{ Form::number('total_estimated_completion_time', $rank->total_estimated_completion_time, ['class' => 'form-control', 'placeholder' => '']) }}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::label('thumbnail', 'Ảnh thumbnail') }}
-                        {{ Form::file('thumbnail', ['class' => 'form-control']) }}
-                    </div>
-                    {{ Form::hidden('_method', 'PUT') }}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ Form::submit('Lưu thay đổi', ['class' => 'btn btn-primary btn-lg btn-block']) }}
+                    <form method="POST" action="{{ route('ranks.update', $rank->id) }}" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="name">{{ __('Bậc Rank') }}</label>
+                            <select id="name"  class="form-control @error('name') is-invalid @enderror" name="name" required>
+                                <option value="Đồng">Đồng</option>
+                                <option value="Bạc">Bạc</option>
+                                <option value="Vàng">Vàng</option>
+                                <option value="Bạch Kim">Bạch Kim</option>
+                                <option value="Kim Cương">Kim Cương</option>
+                                <option value="Tinh Anh">Tinh Anh</option>
+                                <option value="Cao Thủ">Cao Thủ</option>
+                            </select>
+
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        <div class="col-md-6">
-                            <a href="{{ route('rank.index') }}" class="btn btn-secondary btn-lg btn-block"><i class="far fa-times-circle"></i> Hủy</a>
+
+                        <div class="form-group">
+                          <label for="price">{{ __('Giá') }}</label>
+                          <input id="price" type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ round($rank->price, 2) }}" required>
+                          
+                          @error('price')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
                         </div>
-                    </div>
-                    {!! Form::close() !!}
+
+                        <div class="form-group">
+                          <label for="old_price">{{ __('Giá cũ') }}</label>
+                          <input id="old_price" type="number" class="form-control @error('old_price') is-invalid @enderror" name="old_price" value="{{ round($rank->old_price, 2) }}" required>
+                          
+                          @error('old_price')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                        </div>
+
+                        <div class="form-group">
+                          <label for="total_price">{{ __('Tổng') }}</label>
+                          <input id="total_price" type="number" class="form-control @error('total_price') is-invalid @enderror" name="total_price" value="{{ round($rank->total_price, 2) }}" required>
+                          
+                          @error('total_price')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                        </div>
+
+                        <div class="form-group">
+                          <label for="estimated_completion_time">{{ __('Thời gian hoàn thành dự kiến') }}</label>
+                          <input id="estimated_completion_time" type="number" class="form-control @error('estimated_completion_time') is-invalid @enderror" name="estimated_completion_time" value="{{ $rank->estimated_completion_time }}" required>
+                          
+                          @error('estimated_completion_time')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                        </div>
+
+                        <div class="form-group">
+                          <label for="total_estimated_completion_time">{{ __('Tổng thời gian hoàn thành dự kiến') }}</label>
+                          <input id="total_estimated_completion_time" type="number" class="form-control @error('total_estimated_completion_time') is-invalid @enderror" name="total_estimated_completion_time" value="{{ $rank->total_estimated_completion_time }}" required>
+                          
+                          @error('total_estimated_completion_time')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                        </div>
+
+                        <div class="form-group">
+                          <label for="thumbnail">{{ __('Ảnh thumbnail') }}</label>
+                          <input id="thumbnail" type="file" name="thumbnail" class="form-control">
+                        </div>
+
+                        @error('thumbnail')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <div class="form-group row">
+                          <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Lưu thay đổi') }}</button>
+                          </div>
+                          <div class="col-md-6">
+                              <a class="btn btn-link btn-lg btn-block" href="{{ route('ranks.index') }}" role="button">{{ __('Quay lại') }}</a>
+                          </div>
+                        </div>
+                    </form>
                 </div><!-- .card-body -->
             </div><!-- .card -->
         </div><!-- .col-md-12 -->

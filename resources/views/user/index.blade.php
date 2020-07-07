@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Thành viên') }} <a href="{{ route('user.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Tạo</a>
+                    {{ __('Thành viên') }} <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Tạo</a>
                 </div>
                 <div class="card-body">
                 @if (count($users) > 0)
@@ -25,12 +25,12 @@
                         @foreach ($users as $user)
                             <tr>
                                 <th scope="row" class="text-center">{{ $user->id }}</th>
-                                <td><a href="{{ route('user.show', $user->id) }}" class="font-weight-bold">{{ $user->name }}</a></td>
+                                <td><a href="{{ route('users.show', $user->id) }}" class="font-weight-bold">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('user.show', $user->id) }}" class="btn btn-secondary btn-sm mr-2"><i class="far fa-eye"></i></a>
-                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
+                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-secondary btn-sm mr-2"><i class="far fa-eye"></i></a>
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
                                 </td>
                             </tr>
                         @endforeach

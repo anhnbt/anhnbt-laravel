@@ -19,7 +19,7 @@ class RankController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
     }
     
     /**
@@ -62,7 +62,7 @@ class RankController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('rank/create')
+            return redirect()->route('ranks.create')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -91,7 +91,7 @@ class RankController extends Controller
         $rank->thumbnail = $fileNameToStore;
         $rank->save();
 
-        return redirect('rank')->with('success', 'New record created successfully.');
+        return redirect()->route('ranks.create')->with('success', 'New record created successfully.');
     }
 
     /**
@@ -114,8 +114,7 @@ class RankController extends Controller
      */
     public function edit($id)
     {
-        $rank = Rank::findOrFail($id);
-        return view('rank.edit', ['rank' => $rank]);
+        return view('rank.edit', ['rank' => Rank::findOrFail($id)]);
     }
 
     /**
@@ -138,7 +137,7 @@ class RankController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('rank.edit', $id)
+            return redirect()->route('ranks.edit', $id)
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -167,7 +166,7 @@ class RankController extends Controller
         }
         $rank->save();
 
-        return redirect('rank')->with('success', 'Record updated successfully.');
+        return redirect()->route('ranks.edit', $id)->with('success', 'Record updated successfully.');
     }
 
     /**
@@ -183,6 +182,6 @@ class RankController extends Controller
             Storage::delete('public/thumbnails/' . $rank->thumbnail);
         }
         $rank->delete();
-        return redirect('rank')->with('success', 'Record deleted successfully.');
+        return redirect()->route('ranks.index')->with('success', 'Record deleted successfully.');
     }
 }

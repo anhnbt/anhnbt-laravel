@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Rank') }} <a href="{{ route('rank.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Thêm bậc rank</a>
+                    {{ __('Rank') }} <a href="{{ route('ranks.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Thêm bậc rank</a>
                 </div>
                 <div class="card-body">
                 @if(count($ranks) > 0)
@@ -24,13 +24,13 @@
                         @foreach ($ranks as $rank)
                             <tr>
                                 <th scope="col">{{ $rank->id }}</th>
-                                <td><a href="{{ route('rank.show', $rank->id) }}" class="font-weight-bold">{{ $rank->name }}</a></td>
-                                <td>{{ number_format($rank->price, 2) }} ₫</td>
-                                <td>{{ $rank->estimated_completion_time }} Giờ</td>
+                                <td><a href="{{ route('ranks.show', $rank->id) }}" class="font-weight-bold">{{ $rank->name }}</a></td>
+                                <td>{{ number_format($rank->price) }} ₫</td>
+                                <td>{{ $rank->estimated_completion_time }} giờ</td>
                                 <td>{{ $rank->created_at }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('rank.show', $rank->id) }}" class="btn btn-secondary btn-sm mr-2"><i class="far fa-eye"></i></a>
-                                    <a href="{{ route('rank.edit', $rank->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
+                                    <a href="{{ route('ranks.show', $rank->id) }}" class="btn btn-secondary btn-sm mr-2"><i class="far fa-eye"></i></a>
+                                    <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
                                 </td>
                             </tr>
                         @endforeach

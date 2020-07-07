@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +23,12 @@ Route::get('/about', 'PageController@about');
 Route::get('/services', 'PageController@services');
 
 Auth::routes();
+Route::prefix('admin')->group(function () {
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resources([
-    'posts' => 'PostController',
-    'ranks' => 'RankController',
-    'users' => 'UserController',
-]);
+    Route::resources([
+        'posts' => 'PostController',
+        'ranks' => 'RankController',
+        'users' => 'UserController',
+    ]);
+
+});

@@ -12,11 +12,11 @@
                 </div>
                 <div class="card-body">
                 <h5 class="card-title display-4 text-primary">{{ $rank->name }}</h5>
-                <p class="card-text"><span class="font-weight-bold text-danger">{{ number_format($rank->price, 2) }} ₫</span> / <s class="text-muted">{{ number_format($rank->old_price, 2) }} ₫</s></p>
+                <p class="card-text"><span class="font-weight-bold text-danger">{{ number_format($rank->price) }} ₫</span> / <s class="text-muted">{{ number_format($rank->old_price) }} ₫</s></p>
                 @auth
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="{{ route('rank.edit', $rank->id) }}" class="btn btn-primary btn-lg btn-block"><i class="far fa-edit"></i> Edit</a>
+                        <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-primary btn-lg btn-block"><i class="far fa-edit"></i> Edit</a>
                     </div>
                     <div class="col-md-6">
                         {!! Form::open(['action' => ['RankController@destroy', $rank->id], 'method' => 'POST', 'class' => '']) !!}
