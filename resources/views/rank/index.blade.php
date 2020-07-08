@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Rank') }} <a href="{{ route('ranks.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Thêm bậc rank</a>
+                    {{ __('Rank') }} <a href="{{ route('ranks.create') }}" class="btn btn-primary btn-sm float-right">Thêm bậc rank</a>
                 </div>
                 <div class="card-body">
                 @if(count($ranks) > 0)
@@ -31,8 +31,8 @@
                                 <td>{{ $rank->estimated_completion_time }} giờ</td>
                                 <td>{{ $rank->created_at }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('ranks.show', $rank->id) }}" class="btn btn-secondary btn-sm mr-2"><i class="far fa-eye"></i></a>
-                                    <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
+                                    <a href="{{ route('ranks.show', $rank->id) }}" class="btn btn-info text-white btn-sm">Xem</a>
+                                    <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-secondary btn-sm">Chỉnh sửa</a>
                                 </td>
                             </tr>
                         @endforeach
