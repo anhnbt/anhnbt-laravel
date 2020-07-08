@@ -19,7 +19,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'slug', 'description', 'body', 'thumbnail',
+        'title', 'slug', 'description', 'content', 'thumbnail',
     ];
 
     /**
@@ -31,8 +31,11 @@ class Post extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'foreign_key')->withDefault(function ($user, $post) {
-            $user->name = 'Guest Author';
-        });
+        return $this->belongsTo('App\User');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
     }
 }

@@ -13,44 +13,89 @@
                         @method('PUT')
                         @csrf
 
-                        <div class="form-group">
-                            <label for="title">{{ __('Tiêu đề') }}</label>
-                            <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $post->title }}" required autofocus>
-
-                            @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">{{ __('Mô tả')}} </label>
-                            <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ $post->description }}" required>
-
-                            @error('description')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="body">{{ __('Nội dung') }}</label>
-                            <textarea id="body" class="form-control @error('body') is-invalid @enderror" name="body" cols="30" rows="10" required>{{ $post->body }}</textarea>
-
-                            @error('body')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
                         <div class="form-group row">
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Lưu thay đổi') }}</button>
+                            <label for="title" class="col-sm-2 col-form-label">{{ __('Tiêu đề') }} <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $post->title }}" aria-describedby="titleHelp" required autofocus>
+                                <small id="titleHelp" class="form-text text-muted">This is what will appear in the first line when this post shows up in the search results.</small>
+
+                                @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <div class="col-md-6">
-                                <a href="{{ route('posts.index') }}" class="btn btn-link btn-lg btn-block">{{ __('Quay lại') }}</a>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="category_id" class="col-sm-2 col-form-label">{{ __('Chuyên mục') }} <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror">
+                                    @foreach ($categories as $category)
+                                        @if ($post->category_id == $category->id)
+                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                        @else
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+
+                                @error('category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-2 col-form-label">{{ __('Mô tả')}}</label>
+                            
+                            <div class="col-sm-10">
+                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ $post->description }}" aria-describedby="descHelp">
+                                <small id="descHelp" class="form-text text-muted">This is what will appear as the description when this post shows up in the search results.</small>
+
+                                @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="content" class="col-sm-2 col-form-label">{{ __('Nội dung') }} <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" cols="30" rows="10" required>{{ $post->content }}</textarea>
+
+                                @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="is_active" class="col-sm-2 col-form-label">{{ __('Hiển thị') }}</label>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                  <label class="form-check-label">
+                                    @if ($post->is_active == 1)
+                                      <input id="is_active" type="checkbox" class="form-check-input" name="is_active" value="1" checked>
+                                    @else
+                                      <input id="is_active" type="checkbox" class="form-check-input" name="is_active" value="1">
+                                    @endif
+                                    Hiển thị 
+                                  </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-10 offset-2">
+                                <button type="submit" class="btn btn-primary mr-2">{{ __('Cập nhật') }}</button>
+                                <a href="{{ route('posts.index') }}" class="btn btn-secondary">{{ __('Quay lại') }}</a>
                             </div>
                         </div>
                     </form>

@@ -4,22 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rank extends Model
+class Category extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'ranks';
-
+    protected $table = 'categories';
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'price', 'old_price', 'total_price', 'estimated_completion_time', 'total_estimated_completion_time', 'thumbnail',
+        'name', 'slug',
     ];
 
     /**
@@ -29,8 +29,8 @@ class Rank extends Model
      */
     protected $primaryKey = 'id';
 
-    public function user()
+    public function posts()
     {
-        return $this->belongsTo('App\User', 'foreign_key');
+        return $this->hasMany('App\Post');
     }
 }

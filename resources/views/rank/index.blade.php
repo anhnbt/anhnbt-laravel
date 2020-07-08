@@ -14,16 +14,18 @@
                     <table class="table my-2">
                         <thead class=" thead-light">
                             <th scope="col">#</th>
-                            <th scope="col">Bậc rank</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Rank</th>
                             <th scope="col">Giá</th>
                             <th scope="col">Thời gian</th>
                             <th scope="col">Ngày tạo</th>
-                            <th scope="col" class="text-center">Thao tác</th>
+                            <th scope="col" colspan="2" class="text-center">Thao tác</th>
                         </thead>
                         <tbody>
                         @foreach ($ranks as $rank)
                             <tr>
                                 <th scope="col">{{ $rank->id }}</th>
+                                <td><img src="{{ url('storage/thumbnails/' . $rank->thumbnail) }}" width="50" class="img-thumbnail" alt="{{ $rank->name }}"></td>
                                 <td><a href="{{ route('ranks.show', $rank->id) }}" class="font-weight-bold">{{ $rank->name }}</a></td>
                                 <td>{{ number_format($rank->price) }} ₫</td>
                                 <td>{{ $rank->estimated_completion_time }} giờ</td>

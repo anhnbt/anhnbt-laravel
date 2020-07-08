@@ -26,6 +26,7 @@ Auth::routes();
 Route::prefix('admin')->group(function () {
 
     Route::resources([
+        'categories' => 'CategoryController',
         'posts' => 'PostController',
         'ranks' => 'RankController',
         'users' => 'UserController',

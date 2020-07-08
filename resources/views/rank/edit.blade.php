@@ -100,10 +100,10 @@
 
                         <div class="form-group row">
                           <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Lưu thay đổi') }}</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Cập nhật') }}</button>
                           </div>
                           <div class="col-md-6">
-                              <a class="btn btn-link btn-lg btn-block" href="{{ route('ranks.index') }}" role="button">{{ __('Quay lại') }}</a>
+                              <a class="btn btn-secondary btn-lg btn-block" href="{{ route('ranks.index') }}" role="button">{{ __('Quay lại') }}</a>
                           </div>
                         </div>
                     </form>

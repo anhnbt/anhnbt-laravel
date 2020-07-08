@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -28,8 +30,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts = Post::orderBy('id', 'desc')->get();
-        $posts = DB::table('posts')->orderBy('id', 'desc')->paginate(10);
+        $posts = Post::paginate();
         return view('post.index', ['posts' => $posts]);
     }
 
@@ -40,7 +41,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        $categories = Category::all();
+        return view('post.create', ['categories' => $categories]);
     }
 
     /**
@@ -53,7 +55,7 @@ class PostController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
+            'content' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -64,9 +66,12 @@ class PostController extends Controller
 
         $post = new Post;
         $post->user_id = Auth::id();
+        $post->category_id = $request->input('category_id');
         $post->title = $request->input('title');
+        $post->slug = Str::of($request->input('title'))->slug('-');
         $post->description = $request->input('description');
-        $post->body = $request->input('body');
+        $post->content = $request->input('content');
+        $post->is_active = $request->input('is_active');
         $post->save();
 
         return redirect()->route('posts.create')->with('success', 'New record created successfully.');
@@ -92,10 +97,11 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+        $categories = Category::all();
         if (Auth::id() !== $post->user_id) {
             return redirect()->route('posts.index')->with('error', 'Unauthorized page.');
         }
-        return view('post.edit', ['post' => $post]);
+        return view('post.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
@@ -109,7 +115,7 @@ class PostController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
-            'body' => 'required',
+            'content' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -120,9 +126,12 @@ class PostController extends Controller
 
         $post = Post::findOrFail($id);
         $post->user_id = Auth::id();
+        $post->category_id = $request->input('category_id');
         $post->title = $request->input('title');
+        $post->slug = Str::of($request->input('title'))->slug('-');
         $post->description = $request->input('description');
-        $post->body = $request->input('body');
+        $post->content = $request->input('content');
+        $post->is_active = $request->input('is_active');
         $post->save();
 
         return redirect()->route('posts.edit', $id)->with('success', 'Record updated successfully.');
