@@ -71,7 +71,7 @@ class PostController extends Controller
         $post->slug = Str::of($request->input('title'))->slug('-');
         $post->description = $request->input('description');
         $post->content = $request->input('content');
-        $post->is_active = $request->input('is_active');
+        $post->status = $request->input('status');
         $post->save();
 
         return redirect()->route('posts.create')->with('success', 'New record created successfully.');
@@ -131,7 +131,7 @@ class PostController extends Controller
         $post->slug = Str::of($request->input('title'))->slug('-');
         $post->description = $request->input('description');
         $post->content = $request->input('content');
-        $post->is_active = $request->input('is_active');
+        $post->status = $request->input('status');
         $post->save();
 
         return redirect()->route('posts.edit', $id)->with('success', 'Record updated successfully.');
