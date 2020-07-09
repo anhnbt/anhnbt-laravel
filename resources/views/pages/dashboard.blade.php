@@ -12,7 +12,7 @@
             @endauth
             <div class="card">
                 <div class="card-header">
-                    {{ __('Dashboard') }} <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Viết bài mới</a>
+                    {{ __('Dashboard 1.0') }} <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus-circle"></i> Viết bài mới</a>
                 </div>
                 <div class="card-body">
                     @if (session('status'))

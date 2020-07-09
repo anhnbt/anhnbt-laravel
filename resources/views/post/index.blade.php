@@ -19,6 +19,7 @@
                                 <th scope="col">{{ __('Tác giả') }}</th>
                                 <th scope="col">{{ __('Chuyên mục') }}</th>
                                 <th scope="col">{{ __('Thời gian') }}</th>
+                                <th scope="col">{{ __('Status') }}</th>
                                 <th scope="col" colspan="2" class="text-center">{{ __('Thao tác') }}</th>
                             </tr>
                         </thead>
@@ -26,10 +27,17 @@
                         @foreach ($posts as $post)
                             <tr>
                                 <th scope="row" class="text-center">{{ $post->id }}</th>
-                                <td><a href="{{ route('posts.show', $post->id) }}" class="font-weight-bold">{{ $post->title }}</a></td>
+                                <td class="text-truncate" style="max-width: 16rem;"><a href="{{ route('posts.show', $post->id) }}" class="font-weight-bold">{{ $post->title }}</a></td>
                                 <th><a href="{{ route('users.show', $post->user_id) }}">{{ $post->user->name }}</a></th>
-                                <th><a href="{{ route('categories.show', $post->category_id) }}">{{ $post->category->name }}</a></th>
+                                <th><span class="badge badge-pill badge-dark">{{ $post->category->name }}</span></th>
                                 <td>{{ $post->created_at }}</td>
+                                <td>
+                                    @if ($post->is_active == 1)
+                                        <span class="badge badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-danger">In Active</span>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info text-white btn-sm">Xem</a>
                                     <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-sm">Chỉnh sửa</a>

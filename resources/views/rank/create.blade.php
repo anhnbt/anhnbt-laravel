@@ -36,7 +36,8 @@
                         <div class="form-group row">
                           <label for="price" class="col-sm-2 col-form-label">{{ __('Giá (VNĐ)') }}</label>
                           <div class="col-sm-10">
-                            <input id="price" type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required>
+                            <input id="price" type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" aria-describedby="priceHelp" required>
+                            <small id="priceHelp" class="form-text text-muted">This field is required.</small>
                           
                             @error('price')
                                 <span class="invalid-feedback" role="alert">
@@ -101,7 +102,8 @@
                         <div class="form-group row">
                           <label for="thumbnail" class="col-sm-2 col-form-label">{{ __('Ảnh thumbnail') }}</label>
                           <div class="col-sm-10">
-                            <input id="thumbnail" type="file" name="thumbnail" class="form-control">
+                            <input id="thumbnail" type="file" name="thumbnail" class="form-control" aria-describedby="thumbHelp">
+                            <span id="thumbHelp" class="form-text text-muted">The image size should be: 400 X 255</span>
                             
                             @error('thumbnail')
                                 <span class="invalid-feedback" role="alert">

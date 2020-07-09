@@ -60,7 +60,7 @@
                         <div class="form-group row">
                             <label for="content" class="col-sm-2 col-form-label">{{ __('Nội dung') }} <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
-                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" cols="30" rows="10" placeholder="Bạn đang nghĩ gì?" required>{{ old('content') }}</textarea>
+                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" cols="30" rows="10" placeholder="Write something..." required>{{ old('content') }}</textarea>
 
                                 @error('content')
                                     <span class="invalid-feedback" role="alert">
