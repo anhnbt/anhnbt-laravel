@@ -77,18 +77,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="is_active" class="col-sm-2 col-form-label">{{ __('Hiển thị') }}</label>
+                            <label for="status" class="col-sm-2 col-form-label">{{ __('Hiển thị') }}</label>
                             <div class="col-sm-10">
-                                <div class="form-check">
-                                  <label class="form-check-label">
-                                    @if ($post->is_active == 1)
-                                      <input id="is_active" type="checkbox" class="form-check-input" name="is_active" value="1" checked>
-                                    @else
-                                      <input id="is_active" type="checkbox" class="form-check-input" name="is_active" value="1">
-                                    @endif
-                                    Hiển thị 
-                                  </label>
-                                </div>
+                                <select id="status" name="status" class="form-control @error('status') is-invalid @enderror" required>
+                                    <option value="published" selected>Published</option>
+                                    <option value="draft">Bản nháp</option>
+                                    <option value="pending">Đang chờ xử lý</option>
+                                </select>
                             </div>
                         </div>
 

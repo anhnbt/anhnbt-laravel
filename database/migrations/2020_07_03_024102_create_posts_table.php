@@ -24,7 +24,7 @@ class CreatePostsTable extends Migration
             $table->mediumText('description')->nullable();
             $table->text('content');
             $table->string('thumbnail')->nullable();
-            $table->enum('is_active', ['0', '1'])->default('0');
+            $table->enum('status', ['published', 'draft', 'pending'])->default('published');
             $table->timestamps();
         });
     }

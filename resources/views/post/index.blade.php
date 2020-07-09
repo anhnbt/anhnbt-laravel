@@ -19,7 +19,7 @@
                                 <th scope="col">{{ __('Tác giả') }}</th>
                                 <th scope="col">{{ __('Chuyên mục') }}</th>
                                 <th scope="col">{{ __('Thời gian') }}</th>
-                                <th scope="col">{{ __('Status') }}</th>
+                                <th scope="col">{{ __('Trạng thái') }}</th>
                                 <th scope="col" colspan="2" class="text-center">{{ __('Thao tác') }}</th>
                             </tr>
                         </thead>
@@ -32,10 +32,12 @@
                                 <th><span class="badge badge-pill badge-dark">{{ $post->category->name }}</span></th>
                                 <td>{{ $post->created_at }}</td>
                                 <td>
-                                    @if ($post->is_active == 1)
-                                        <span class="badge badge-success">Active</span>
+                                    @if ($post->status == 'published')
+                                        <span class="badge badge-success">Published</span>
+                                    @elseif ($post->status == 'draft')
+                                        <span class="badge badge-secondary">Bản nháp</span>
                                     @else
-                                        <span class="badge badge-danger">In Active</span>
+                                        <span class="badge badge-warning">Đang chờ xử lý</span>
                                     @endif
                                 </td>
                                 <td class="text-center">
