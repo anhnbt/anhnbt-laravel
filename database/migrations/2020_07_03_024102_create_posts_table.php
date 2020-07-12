@@ -24,6 +24,7 @@ class CreatePostsTable extends Migration
             $table->mediumText('description')->nullable();
             $table->text('content');
             $table->string('thumbnail')->nullable();
+            $table->integer('views')->unsigned()->default(0);
             $table->enum('status', ['published', 'draft', 'pending'])->default('published');
             $table->timestamps();
         });

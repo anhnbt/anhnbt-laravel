@@ -102,8 +102,7 @@ class RankController extends Controller
      */
     public function show($id)
     {
-        $rank = Rank::findOrFail($id);
-        return view('rank.show', ['rank' => $rank]);
+        return view('rank.show', ['rank' => Rank::findOrFail($id)]);
     }
 
     /**

@@ -58,7 +58,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('user.create')
+            return redirect()->route('users.create')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -69,7 +69,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        return redirect()->route('user.create')->with('success', 'New user created successfully.');
+        return redirect()->route('users.create')->with('success', 'New user created successfully.');
     }
 
     /**
@@ -80,7 +80,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('user.profile', ['user' => User::findOrFail($id)]);
     }
 
     /**
@@ -91,7 +91,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('user.edit', ['user' => User::findOrFail($id)]);
     }
 
     /**
@@ -103,7 +103,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('users.show', $id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $user = User::findOrFail($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        return redirect()->route('users.show', $id)->with('success', 'Record updated successfully.');
     }
 
     /**
@@ -114,6 +130,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id)->delete();
+        return redirect()->route('users.index')->with('success', 'Record deleted successfully.');
     }
 }
