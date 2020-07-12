@@ -27,7 +27,7 @@
                                 <th scope="row" class="text-center">{{ $user->id }}</th>
                                 <td><a href="{{ route('users.show', $user->id) }}" class="font-weight-bold">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
-                                <td><i class="far fa-clock"></i> {{ $user->created_at }}</td>
+                                <td><i class="far fa-clock"></i> {{ Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-secondary btn-sm"><i class="far fa-eye"></i></a>
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>

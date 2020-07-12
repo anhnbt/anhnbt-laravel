@@ -28,9 +28,9 @@
                             <tr>
                                 <th scope="row" class="text-center">{{ $post->id }}</th>
                                 <td class="text-truncate" style="max-width: 16rem;"><a href="{{ route('posts.show', $post->id) }}" class="font-weight-bold">{{ $post->title }}</a></td>
-                                <th><a href="{{ route('users.show', $post->user_id) }}">{{ $post->user->name }}</a></th>
+                                <th>{{ $post->user->name }}</th>
                                 <th><span class="badge badge-pill badge-dark">{{ $post->category->name }}</span></th>
-                                <td>{{ $post->created_at }}</td>
+                                <td>{{ Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</td>
                                 <td>
                                     @if ($post->status == 'published')
                                         <span class="badge badge-success">Published</span>

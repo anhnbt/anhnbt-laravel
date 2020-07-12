@@ -33,7 +33,7 @@
                             <tr>
                                 <th scope="col">{{ $post->id }}</td>
                                 <td><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></td>
-                                <td>{{ $post->created_at }}</td>
+                                <td>{{ Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</td>
                                 <td>
                                     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-secondary btn-sm"><i class="far fa-eye"></i></a>
                                     <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>

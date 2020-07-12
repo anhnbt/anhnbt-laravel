@@ -18,6 +18,7 @@
                                 <th scope="col">{{ __('Tên') }}</th>
                                 <th scope="col">{{ __('Mô tả') }}</th>
                                 <th scope="col">{{ __('Chuỗi cho đường dẫn tĩnh') }}</th>
+                                <th scope="col">Ngày tạo</th>
                                 <th scope="col" colspan="2" class="text-center">{{ __('Tác vụ') }}</th>
                             </tr>
                         </thead>
@@ -28,6 +29,7 @@
                                 <td><a href="{{ route('categories.show', $category->id) }}" class="font-weight-bold">{{ $category->name }}</a></td>
                                 <td>{{ $category->description ?? '—' }}</td>
                                 <td>{{ $category->slug }}</td>
+                                <td>{{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('categories.show', $category->id) }}" class="btn btn-info text-white btn-sm">Xem</a>
                                     <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-secondary btn-sm">Chỉnh sửa</a>

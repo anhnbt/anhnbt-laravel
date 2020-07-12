@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 
 use App\Post;
 use App\Category;
+use App\User;
 
 class PostController extends Controller
 {
@@ -30,7 +31,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate();
+        // $posts = DB::table('posts')->orderBy('id', 'desc')->paginate(15);
+        $posts = Post::orderBy('id', 'desc')->paginate(15);
         return view('post.index', ['posts' => $posts]);
     }
 

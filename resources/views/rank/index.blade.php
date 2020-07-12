@@ -29,7 +29,7 @@
                                 <td><a href="{{ route('ranks.show', $rank->id) }}" class="font-weight-bold">{{ $rank->name }}</a></td>
                                 <td>{{ number_format($rank->price) }} ₫</td>
                                 <td>{{ $rank->estimated_completion_time }} giờ</td>
-                                <td>{{ $rank->created_at }}</td>
+                                <td>{{ Carbon\Carbon::parse($rank->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('ranks.show', $rank->id) }}" class="btn btn-info text-white btn-sm">Xem</a>
                                     <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-secondary btn-sm">Chỉnh sửa</a>
