@@ -80,9 +80,9 @@
                             <label for="status" class="col-sm-2 col-form-label">{{ __('Hiển thị') }}</label>
                             <div class="col-sm-10">
                                 <select id="status" name="status" class="form-control @error('status') is-invalid @enderror" required>
-                                    <option value="published" selected>Published</option>
-                                    <option value="draft">Bản nháp</option>
-                                    <option value="pending">Đang chờ xử lý</option>
+                                    <option value="published" @if ($post->status == 'published') selected @endif>Published</option>
+                                    <option value="draft" @if ($post->status == 'draft') selected @endif>Bản nháp</option>
+                                    <option value="pending" @if ($post->status == 'pending') selected @endif>Đang chờ xử lý</option>
                                 </select>
                             </div>
                         </div>

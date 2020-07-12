@@ -65,7 +65,8 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">{{ __('Tạo') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Thêm thành viên') }}</button>
+                                <a href="{{ route('users.index') }}" class="btn btn-secondary">{{ __('Quay lại') }}</a>
                             </div>
                         </div>
                     </form>

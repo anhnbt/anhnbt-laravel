@@ -35,13 +35,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item{{ Request::is('admin/categories*') ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('categories.index') }}">{{ __('Chuyên mục') }}</a>
+                            <a class="nav-link" href="{{ route('categories.index') }}"><i class="fas fa-folder-open"></i> {{ __('Chuyên mục') }}</a>
                         </li>
                         <li class="nav-item{{ Request::is('admin/users*') ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('users.index') }}">{{ __('Thành viên') }}</a>
+                            <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-users"></i> {{ __('Thành viên') }}</a>
                         </li>
                         <li class="nav-item{{ Request::is('admin/posts*') ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('posts.index') }}">{{ __('Bài viết') }}</a>
+                            <a class="nav-link" href="{{ route('posts.index') }}"><i class="fas fa-newspaper"></i> {{ __('Bài viết') }}</a>
                         </li>
                         <li class="nav-item{{ Request::is('admin/ranks*') ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('ranks.index') }}">{{ __('Rank') }}</a>
@@ -63,14 +63,14 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <i class="fas fa-user-circle"></i> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
