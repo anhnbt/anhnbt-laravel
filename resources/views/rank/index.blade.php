@@ -19,7 +19,7 @@
                             <th scope="col">Giá</th>
                             <th scope="col">Thời gian</th>
                             <th scope="col">Ngày tạo</th>
-                            <th scope="col" colspan="2" class="text-center">Thao tác</th>
+                            <th scope="col" colspan="2" class="text-center">Tác vụ</th>
                         </thead>
                         <tbody>
                         @foreach ($ranks as $rank)

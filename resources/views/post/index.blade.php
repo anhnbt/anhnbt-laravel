@@ -20,7 +20,7 @@
                                 <th scope="col">{{ __('Chuyên mục') }}</th>
                                 <th scope="col">{{ __('Thời gian') }}</th>
                                 <th scope="col">{{ __('Trạng thái') }}</th>
-                                <th scope="col" colspan="2" class="text-center">{{ __('Thao tác') }}</th>
+                                <th scope="col" colspan="2" class="text-center">{{ __('Tác vụ') }}</th>
                             </tr>
                         </thead>
                         <tbody>

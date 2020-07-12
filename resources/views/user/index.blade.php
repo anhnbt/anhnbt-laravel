@@ -18,7 +18,7 @@
                                 <th scope="col">Tên</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Ngày tạo</th>
-                                <th scope="col" colspan="2" class="text-center">Thao tác</th>
+                                <th scope="col" colspan="2" class="text-center">Tác vụ</th>
                             </tr>
                         </thead>
                         <tbody>

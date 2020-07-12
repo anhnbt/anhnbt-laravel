@@ -26,7 +26,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Tiêu đề</th>
                             <th scope="col">Ngày tạo</th>
-                            <th scope="col">Thao tác</th>
+                            <th scope="col">Tác vụ</th>
                         </thead>
                         <tbody>
                             @foreach ($posts as $post)
