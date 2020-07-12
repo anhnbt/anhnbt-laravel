@@ -102,7 +102,7 @@
                         <div class="form-group row">
                           <label for="thumbnail" class="col-sm-2 col-form-label">{{ __('Ảnh thumbnail') }}</label>
                           <div class="col-sm-10">
-                            <input id="thumbnail" type="file" name="thumbnail" class="form-control" aria-describedby="thumbHelp">
+                            <input id="thumbnail" type="file" name="thumbnail" class="form-control-file @error('thumbnail') is-invalid @enderror" aria-describedby="thumbHelp">
                             <span id="thumbHelp" class="form-text text-muted">The image size should be: 400 X 255</span>
                             
                             @error('thumbnail')

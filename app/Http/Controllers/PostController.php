@@ -58,12 +58,25 @@ class PostController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|unique:posts|max:255',
             'content' => 'required',
+            'thumbnail' => 'image|nullable:max:2048',
         ]);
 
         if ($validator->fails()) {
             return redirect()->route('posts.create')
                         ->withErrors($validator)
                         ->withInput();
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $fileNameWithExt = $request->file('thumbnail')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('thumbnail')->extension();
+            $fileNameToStore = $fileName . '-' . time() . '.' . $extension;
+            $path = $request->file('thumbnail')->storeAs(
+                'public/thumbnails', $fileNameToStore
+            );
+        } else {
+            $fileNameToStore = 'noimage.jpg';
         }
 
         $post = new Post;
@@ -73,6 +86,7 @@ class PostController extends Controller
         $post->slug = Str::of($request->input('title'))->slug('-');
         $post->description = $request->input('description');
         $post->content = $request->input('content');
+        $post->thumbnail = $fileNameToStore;
         $post->status = $request->input('status');
         $post->save();
 
@@ -118,12 +132,23 @@ class PostController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
             'content' => 'required',
+            'thumbnail' => 'image|nullable|max:2048',
         ]);
 
         if ($validator->fails()) {
             return redirect()->route('posts.edit', $id)
                         ->withErrors($validator)
                         ->withInput();
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $fileNameWithExt = $request->file('thumbnail')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('thumbnail')->extension();
+            $fileNameToStore = $fileName . '-' . time() . '.' . $extension;
+            $path = $request->file('thumbnail')->storeAs(
+                'public/thumbnails', $fileNameToStore
+            );
         }
 
         $post = Post::findOrFail($id);
@@ -133,6 +158,9 @@ class PostController extends Controller
         $post->slug = Str::of($request->input('title'))->slug('-');
         $post->description = $request->input('description');
         $post->content = $request->input('content');
+        if ($request->hasFile('thumbnail')) {
+            $post->thumbnail = $fileNameToStore;
+        }
         $post->status = $request->input('status');
         $post->save();
 

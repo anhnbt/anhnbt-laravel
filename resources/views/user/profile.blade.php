@@ -31,7 +31,8 @@
                         <div class="form-group row">
                             <label for="email" class="col-form-label col-sm-2">{{ __('E-Mail Address') }}</label>
                             <div class="col-sm-10">
-                                <input id="email" type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}" required>
+                                <input id="email" type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}" aria-describedby="emailHelp" required>
+                                <small id="emailHelp" class="form-text text-muted">Địa chỉ mà chúng tôi có thể liên hệ với bạn nếu tài khoản của bạn có hoạt động bất thường hoặc bị khóa.</small>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -43,8 +44,8 @@
 
                         <div class="form-group row">
                             <div class="col-sm-10 offset-2">
-                                <button type="submit" class="btn btn-primary">{{ __('Cập nhật') }}</button>
-                                <a href="{{ route('users.index') }}" class="btn btn-secondary">{{ __('Quay lại') }}</a>
+                                <button type="submit" class="btn btn-primary">{{ __('Lưu') }}</button>
+                                <a href="{{ route('users.index') }}" class="btn btn-link" role="button">{{ __('Hủy') }}</a>
                             </div>
                         </div>
                     </form>

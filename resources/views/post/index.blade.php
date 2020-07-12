@@ -15,6 +15,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">{{ __('Ảnh') }}</th>
                                 <th scope="col">{{ __('Tiêu đề') }}</th>
                                 <th scope="col">{{ __('Tác giả') }}</th>
                                 <th scope="col">{{ __('Chuyên mục') }}</th>
@@ -27,6 +28,13 @@
                         @foreach ($posts as $post)
                             <tr>
                                 <th scope="row" class="text-center">{{ $post->id }}</th>
+                                <td>
+                                @if ($post->thumbnail != '')
+                                    <img src="{{ url('storage/thumbnails/' . $post->thumbnail) }}" width="50" class="img-thumbnail" alt="{{ $post->title }}">
+                                @else
+                                    <img src="{{ url('images/noimage.jpg') }}" width="50" class="img-thumbnail" alt="{{ $post->title }}">
+                                @endif
+                                </td>
                                 <td class="text-truncate" style="max-width: 16rem;"><a href="{{ route('posts.show', $post->id) }}" class="font-weight-bold">{{ $post->title }}</a></td>
                                 <th>{{ $post->user->name }}</th>
                                 <th><span class="badge badge-pill badge-dark">{{ $post->category->name }}</span></th>

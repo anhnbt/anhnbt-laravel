@@ -73,8 +73,7 @@ class RankController extends Controller
             $extension = $request->file('thumbnail')->extension();
             $fileNameToStore = $fileName . '-' . time() . '.' . $extension;
             $path = $request->file('thumbnail')->storeAs(
-                'public/thumbnails',
-                $fileNameToStore
+                'public/thumbnails', $fileNameToStore
             );
         } else {
             $fileNameToStore = 'noimage.jpg';
@@ -147,8 +146,7 @@ class RankController extends Controller
             $extension = $request->file('thumbnail')->extension();
             $fileNameToStore = $fileName . '-' . time() . '.' . $extension;
             $path = $request->file('thumbnail')->storeAs(
-                'public/thumbnails',
-                $fileNameToStore
+                'public/thumbnails', $fileNameToStore
             );
         }
 

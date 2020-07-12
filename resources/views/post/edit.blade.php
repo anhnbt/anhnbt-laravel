@@ -9,7 +9,7 @@
                 <div class="card-header">{{ __('Chỉnh sửa bài viết') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('posts.update', $post->id) }}">
+                    <form method="POST" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
 
@@ -69,6 +69,20 @@
                                 <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" cols="30" rows="10" placeholder="Write something..." required>{{ $post->content }}</textarea>
 
                                 @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="thumbnail" class="col-sm-2 col-form-label">{{ __('Ảnh') }}</label>
+                            <div class="col-sm-10">
+                                <input id="thumbnail" type="file" class="form-control-file @error('thumbnail') is-invalid @enderror" name="thumbnail" aria-describedby="thumbHelp">
+                                <small id="thumbHelp" class="form-text text-muted">The image size should be: 400 X 255</small>
+
+                                @error('thumbnail')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

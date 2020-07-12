@@ -103,7 +103,7 @@
                           <label for="thumbnail" class="col-sm-2 col-form-label">{{ __('Ảnh thumbnail') }}</label>
                           <div class="col-sm-10">
                             <img src="{{ url('storage/thumbnails/' . $rank->thumbnail) }}" class="img-thumbnail rounded mx-auto d-block mb-2" alt="{{ $rank->name }}">
-                            <input id="thumbnail" type="file" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror">
+                            <input id="thumbnail" type="file" name="thumbnail" class="form-control-file @error('thumbnail') is-invalid @enderror">
                             
                             @error('thumbnail')
                                 <span class="invalid-feedback" role="alert">
