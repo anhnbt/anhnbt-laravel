@@ -52,7 +52,7 @@
                     @endauth
                 </div>
                 <div class="card-footer text-muted">
-                    <small>{{ __('Tham gia từ') }} {{ $user->created_at }}</small>
+                    <small>{{ __('Tham gia từ') }} {{ Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</small>
                 </div>
             </div><!-- .card -->
         </div><!-- .col-md-12 -->
