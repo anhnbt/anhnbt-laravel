@@ -21,7 +21,7 @@
                     @auth
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-lg btn-block"><i class="far fa-edit"></i> {{ __('Edit') }}</a>
+                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-lg btn-block" role="button"><i class="far fa-edit"></i> {{ __('Edit') }}</a>
                         </div>
                         <div class="col-md-6">
                             {!! Form::open(['action' => ['PostController@destroy', $post->id], 'method' => 'POST', 'class' => '']) !!}

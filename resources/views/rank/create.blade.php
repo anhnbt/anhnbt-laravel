@@ -116,7 +116,7 @@
                         <div class="form-group row">
                           <div class="col-md-10 offset-2">
                             <button type="submit" class="btn btn-primary">{{ __('Lưu') }}</button>
-                            <a class="btn btn-secondary" href="{{ route('ranks.index') }}" role="button">{{ __('Quay lại') }}</a>
+                            <a class="btn btn-link" href="{{ route('ranks.index') }}" role="button">{{ __('Hủy') }}</a>
                           </div>
                         </div>
                     </form>

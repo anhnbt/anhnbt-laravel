@@ -29,8 +29,16 @@
                                 <td>{{ $user->email }}</td>
                                 <td><i class="far fa-clock"></i> {{ Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-secondary btn-sm"><i class="far fa-eye"></i></a>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info text-white btn-sm"><i class="far fa-edit"></i></a>
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-info text-white" role="button">{{ __('Xem') }}</a>
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-secondary" role="button">{{ __('Chỉnh sửa') }}</a>
+                                            @method('DELETE')
+                                            @csrf
+
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">{{ __('Xóa') }}</button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

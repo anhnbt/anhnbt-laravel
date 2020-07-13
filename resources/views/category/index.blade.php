@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Chuyên mục') }} <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm float-right">{{ __('Thêm chuyên mục') }}</a>
+                    {{ __('Chuyên mục') }} <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm float-right" role="button">{{ __('Thêm chuyên mục') }}</a>
                 </div>
                 <div class="card-body">
                 @if (count($categories) > 0)
@@ -31,8 +31,16 @@
                                 <td>{{ $category->slug }}</td>
                                 <td>{{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('categories.show', $category->id) }}" class="btn btn-info text-white btn-sm">Xem</a>
-                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-secondary btn-sm">Chỉnh sửa</a>
+                                    <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-info text-white" role="button">{{ __('Xem') }}</a>
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-secondary" role="button">{{ __('Chỉnh sửa') }}</a>
+                                            @method('DELETE')
+                                            @csrf
+
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">{{ __('Xóa') }}</button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

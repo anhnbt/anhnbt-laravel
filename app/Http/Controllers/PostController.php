@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 use App\Post;
 use App\Category;
-use App\User;
 
 class PostController extends Controller
 {
@@ -178,6 +177,9 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         if (Auth::id() !== $post->user_id) {
             return redirect()->route('posts.index')->with('error', 'Unauthorized page.');
+        }
+        if ($post->thumbnail !== 'noimage.jpg') {
+            Storage::delete('public/thumbnails/' . $post->thumbnail);
         }
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Record deleted successfully.');

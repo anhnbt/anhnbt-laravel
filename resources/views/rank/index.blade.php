@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Rank') }} <a href="{{ route('ranks.create') }}" class="btn btn-primary btn-sm float-right">Tạo mới</a>
+                    {{ __('Rank') }} <a href="{{ route('ranks.create') }}" class="btn btn-primary btn-sm float-right" role="button">Tạo mới</a>
                 </div>
                 <div class="card-body">
                 @if(count($ranks) > 0)
@@ -31,8 +31,16 @@
                                 <td>{{ $rank->estimated_completion_time }} giờ</td>
                                 <td>{{ Carbon\Carbon::parse($rank->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('ranks.show', $rank->id) }}" class="btn btn-info text-white btn-sm">Xem</a>
-                                    <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-secondary btn-sm">Chỉnh sửa</a>
+                                    <form action="{{ route('ranks.destroy', $rank->id) }}" method="POST">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{{ route('ranks.show', $rank->id) }}" class="btn btn-info text-white" role="button">{{ __('Xem') }}</a>
+                                            <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-secondary" role="button">{{ __('Chỉnh sửa') }}</a>
+                                            @method('DELETE')
+                                            @csrf
+
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">{{ __('Xóa') }}</button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

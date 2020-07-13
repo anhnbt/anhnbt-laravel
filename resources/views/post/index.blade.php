@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Bài viết') }} <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm float-right">{{ __('Viết bài mới') }}</a>
+                    {{ __('Bài viết') }} <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm float-right" role="button">{{ __('Viết bài mới') }}</a>
                 </div>
                 <div class="card-body">
                 @if (count($posts) > 0)
@@ -49,8 +49,16 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info text-white btn-sm">Xem</a>
-                                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-sm">Chỉnh sửa</a>
+                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info text-white" role="button">{{ __('Xem') }}</a>
+                                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary" role="button">{{ __('Chỉnh sửa') }}</a>
+                                            @method('DELETE')
+                                            @csrf
+
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">{{ __('Xóa') }}</button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

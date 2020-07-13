@@ -16,7 +16,7 @@
                 @auth
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-primary btn-lg btn-block"><i class="far fa-edit"></i> Edit</a>
+                        <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-primary btn-lg btn-block" role="button"><i class="far fa-edit"></i> Edit</a>
                     </div>
                     <div class="col-md-6">
                         {!! Form::open(['action' => ['RankController@destroy', $rank->id], 'method' => 'POST', 'class' => '']) !!}

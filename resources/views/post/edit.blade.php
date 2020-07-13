@@ -104,7 +104,7 @@
                         <div class="form-group row">
                             <div class="col-sm-10 offset-2">
                                 <button type="submit" class="btn btn-primary mr-2">{{ __('Cập nhật') }}</button>
-                                <a href="{{ route('posts.index') }}" class="btn btn-secondary">{{ __('Quay lại') }}</a>
+                                <a href="{{ route('posts.index') }}" class="btn btn-link" role="button">{{ __('Hủy') }}</a>
                             </div>
                         </div>
                     </form>
