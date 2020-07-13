@@ -7,7 +7,7 @@
         <div class="col-md-12">
             @auth('admin')
             <div class="alert alert-info" role="alert">
-                Xin chào <strong>{{ Auth::user()->name }}</strong>! Bạn đã đăng nhập vào khu vực Quản trị!
+                Xin chào <span class="font-weight-bold text-danger">{{ Auth::user()->name }}</span>! Bạn đã đăng nhập vào khu vực Quản trị!
             </div>
             @endauth
             <div class="card">

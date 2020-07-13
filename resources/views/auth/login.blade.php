@@ -16,7 +16,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" aria-describedby="emailHelp" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" aria-describedby="emailHelp" required autocomplete="email" autofocus>
                                 <small id="emailHelp" class="form-text text-muted">Please enter your valid email address.</small>
 
                                 @error('email')
@@ -31,7 +31,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" aria-describedby="passwordHelp" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Vui lòng nhập mật khẩu" aria-describedby="passwordHelp" required autocomplete="current-password">
                                 <small id="passwordHelp" class="form-text text-muted">Please enter your passwrod.</small>
 
                                 @error('password')
