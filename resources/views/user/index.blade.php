@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Thành viên') }} <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right">Thêm thành viên</a>
+                    {{ __('Thành viên') }} <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right" role="button">Thêm mới</a>
                 </div>
                 <div class="card-body">
                 @if (count($users) > 0)

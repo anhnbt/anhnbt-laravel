@@ -7,12 +7,12 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Rank') }} <a href="{{ route('ranks.create') }}" class="btn btn-primary btn-sm float-right" role="button">Tạo mới</a>
+                    {{ __('Rank') }} <a href="{{ route('ranks.create') }}" class="btn btn-primary btn-sm float-right" role="button">Thêm mới</a>
                 </div>
                 <div class="card-body">
                 @if(count($ranks) > 0)
                     <table class="table my-2">
-                        <thead class=" thead-light">
+                        <thead class="thead-light">
                             <th scope="col">#</th>
                             <th scope="col">Image</th>
                             <th scope="col">Rank</th>
@@ -32,12 +32,12 @@
                                 <td>{{ Carbon\Carbon::parse($rank->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
                                     <form action="{{ route('ranks.destroy', $rank->id) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+
                                         <div class="btn-group btn-group-sm" role="group">
                                             <a href="{{ route('ranks.show', $rank->id) }}" class="btn btn-info text-white" role="button">{{ __('Xem') }}</a>
                                             <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-secondary" role="button">{{ __('Chỉnh sửa') }}</a>
-                                            @method('DELETE')
-                                            @csrf
-
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">{{ __('Xóa') }}</button>
                                         </div>
                                     </form>

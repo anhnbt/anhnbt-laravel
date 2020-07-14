@@ -2,26 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 
-use App\Category;
-
-class CategoryController extends Controller
+class RoleController extends Controller
 {
-    
     /**
      * Create a new controller instance.
-     * 
      * @return void
      */
     public function __construct()
     {
         $this->middleware('auth:admin');
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -29,8 +24,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->orderBy('id', 'desc')->paginate(10);
-        return view('category.index', ['categories' => $categories]);
+        $roles = Role::orderBy('id', 'desc')->paginate(15);
+        return view('role.index', ['roles' => $roles]);
     }
 
     /**
@@ -40,7 +35,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        return view('role.create');
     }
 
     /**
@@ -52,23 +47,19 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:categories|max:255',
+            'name' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('categories.create')
+            return redirect()->route('roles.create')
                         ->withErrors($validator)
                         ->withInput();
         }
 
-        $category = new Category;
-        $category->name = $request->input('name');
-        $category->slug = Str::of($request->input('name'))->slug('-');
-        $category->parent_id = $request->input('parent_id');
-        $category->description = $request->input('description');
-        $category->save();
-
-        return redirect()->route('categories.create')->with('success', 'New record created successfully.');
+        $role = new Role;
+        $role->name = $request->input('name');
+        $role->save();
+        return redirect()->route('roles.create')->with('success', 'New record created succussfully.');
     }
 
     /**
@@ -79,7 +70,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('role.show', ['role' => Role::findOrFail($id)]);
     }
 
     /**
@@ -90,8 +81,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('category.edit', ['category' => $category]);
+        return view('role.edit', ['role' => Role::findOrFail($id)]);
     }
 
     /**
@@ -104,23 +94,19 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
+            'name' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('categories.edit', $id)
+            return redirect()->route('roles.edit', $id)
                         ->withErrors($validator)
                         ->withInput();
         }
 
-        $category = Category::findOrFail($id);
-        $category->name = $request->input('name');
-        $category->slug = Str::of($request->input('name'))->slug('-');
-        $category->parent_id = $request->input('parent_id');
-        $category->description = $request->input('description');
-        $category->save();
-
-        return redirect()->route('categories.edit', $id)->with('success', 'Record updated successfully.');
+        $role = Role::findOrFail($id);
+        $role->name = $request->input('name');
+        $role->save();
+        return redirect()->route('roles.edit', $id)->with('success', 'Record updated succussfully.');
     }
 
     /**
@@ -131,8 +117,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        return redirect()->route('categories.index')->with('success', 'Record deleted successfully.');
+        $role = Role::findOrFail($id);
+        $role->delete();
+        return redirect()->route('roles.index')->with('success', 'Record deleted successfully.');
     }
 }

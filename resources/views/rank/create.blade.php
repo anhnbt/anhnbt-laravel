@@ -15,7 +15,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-sm-2 col-form-label">{{ __('Bậc Rank') }}</label>
                             <div class="col-sm-10">
-                                <select id="name"  class="form-control @error('name') is-invalid @enderror" name="name" required>
+                                <select id="name" class="form-control @error('name') is-invalid @enderror" name="name" required>
                                     <option value="Đồng">Đồng</option>
                                     <option value="Bạc">Bạc</option>
                                     <option value="Vàng">Vàng</option>
@@ -114,7 +114,7 @@
                         </div>
 
                         <div class="form-group row">
-                          <div class="col-md-10 offset-2">
+                          <div class="col-sm-10 offset-2">
                             <button type="submit" class="btn btn-primary">{{ __('Lưu') }}</button>
                             <a class="btn btn-link" href="{{ route('ranks.index') }}" role="button">{{ __('Hủy') }}</a>
                           </div>

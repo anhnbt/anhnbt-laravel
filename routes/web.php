@@ -30,6 +30,7 @@ Route::prefix('admin')->group(function () {
         'posts' => 'PostController',
         'ranks' => 'RankController',
         'users' => 'UserController',
+        'roles' => 'RoleController',
     ]);
 
 });
