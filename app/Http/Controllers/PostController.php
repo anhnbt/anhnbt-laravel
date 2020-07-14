@@ -100,7 +100,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('post.show', ['post' => Post::findOrFail($id)]);
+        $post = Post::findOrFail($id);
+        $post->increment('views');
+        return view('post.show', ['post' => $post]);
     }
 
     /**
