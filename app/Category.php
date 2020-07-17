@@ -33,4 +33,9 @@ class Category extends Model
     {
         return $this->hasMany('App\Post');
     }
+
+    public function categories()
+    {
+        return $this->hasMany('App\Category', 'parent_id');
+    }
 }

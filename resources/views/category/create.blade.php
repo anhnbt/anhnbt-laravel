@@ -30,8 +30,15 @@
                             <label for="parent_id" class="col-sm-2 col-form-label">{{ __('Chuyên mục hiện tại') }} <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <select id="parent_id" class="form-control @error('parent_id') is-invalid @enderror" name="parent_id">
-                                    <option value="-1">Trống</option>
-                                    <option value="1">Chưa được phân loại</option>
+                                    <option value="">Trống</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @if ($category->categories)
+                                            @foreach ($category->categories as $child)
+                                                @include('category.child', ['child' => $child, 'parent' => '— '])
+                                            @endforeach
+                                        @endif
+                                    @endforeach
                                 </select>
 
                                 @error('parent_id')

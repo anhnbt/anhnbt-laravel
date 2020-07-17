@@ -29,7 +29,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->orderBy('id', 'desc')->paginate(10);
+        // $categories = DB::table('categories')->orderBy('id', 'desc')->paginate(10);
+        $categories = Category::whereNull('parent_id')
+                                ->with('categories')
+                                ->paginate(10);
         return view('category.index', ['categories' => $categories]);
     }
 
@@ -40,7 +43,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        $categories = Category::whereNull('parent_id')
+                                ->with('categories')
+                                ->get();
+        return view('category.create', ['categories' => $categories]);
     }
 
     /**
@@ -53,6 +59,7 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:categories|max:255',
+            'thumbnail' => 'image|nullable|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -61,11 +68,24 @@ class CategoryController extends Controller
                         ->withInput();
         }
 
+        if ($request->hasFile('thumbnail')) {
+            $fileNameWithExt = $request->file('thumbnail')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('thumbnail')->extension();
+            $fileNameToStore = $fileName . '-' . time() . '.' . $extension;
+            $path = $request->file('thumbnail')->storeAs(
+                'public/thumbnails', $fileNameToStore
+            );
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
         $category = new Category;
         $category->name = $request->input('name');
         $category->slug = Str::of($request->input('name'))->slug('-');
         $category->parent_id = $request->input('parent_id');
         $category->description = $request->input('description');
+        
         $category->save();
 
         return redirect()->route('categories.create')->with('success', 'New record created successfully.');
@@ -113,11 +133,25 @@ class CategoryController extends Controller
                         ->withInput();
         }
 
+        if ($request->hasFile('thumbnail')) {
+            $fileNameWithExt = $request->file('thumbnail')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('thumbnail')->extension();
+            $fileNameToStore = $fileName . '-' . time() . '.' . $extension;
+            $path = $request->file('thumbnail')->storeAs(
+                'public/thumbnails', $fileNameToStore
+            );
+        }
+
         $category = Category::findOrFail($id);
         $category->name = $request->input('name');
         $category->slug = Str::of($request->input('name'))->slug('-');
         $category->parent_id = $request->input('parent_id');
         $category->description = $request->input('description');
+        if ($request->hasFile('thumbnail')) {
+            $category->thumbnail = $fileNameToStore;
+        }
+
         $category->save();
 
         return redirect()->route('categories.edit', $id)->with('success', 'Record updated successfully.');

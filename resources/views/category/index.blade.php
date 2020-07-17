@@ -26,7 +26,7 @@
                         @foreach ($categories as $category)
                             <tr>
                                 <th scope="row" class="text-center">{{ $category->id }}</th>
-                                <td><a href="{{ route('categories.show', $category->id) }}" class="font-weight-bold">{{ $category->name }}</a></td>
+                                <td>{{ $category->name }}</td>
                                 <td>{{ $category->description ?? '—' }}</td>
                                 <td>{{ $category->slug }}</td>
                                 <td>{{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}</td>
@@ -43,6 +43,11 @@
                                     </form>
                                 </td>
                             </tr>
+                            @if ($category->categories)
+                                @foreach ($category->categories as $child)
+                                    @include('category.child_tr', ['child' => $child, 'parent' => '— '])
+                                @endforeach
+                            @endif
                         @endforeach
                         </tbody>
                     </table>
