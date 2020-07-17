@@ -29,9 +29,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // $categories = DB::table('categories')->orderBy('id', 'desc')->paginate(10);
         $categories = Category::whereNull('parent_id')
                                 ->with('categories')
+                                ->orderBy('id', 'desc')
                                 ->paginate(10);
         return view('category.index', ['categories' => $categories]);
     }
@@ -111,7 +111,11 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        return view('category.edit', ['category' => $category]);
+        $categories = Category::whereNull('parent_id')
+                                ->with('categories')
+                                ->orderBy('id', 'desc')
+                                ->paginate(10);
+        return view('category.edit', ['category' => $category, 'categories' => $categories]);
     }
 
     /**

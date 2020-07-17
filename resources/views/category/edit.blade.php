@@ -9,7 +9,7 @@
                 <div class="card-header">{{ __('Chỉnh sửa chuyên mục') }}</div>
                 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('categories.update', $category->id) }}">
+                    <form method="POST" action="{{ route('categories.update', $category->id) }}" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
 
@@ -31,8 +31,15 @@
                             <label for="parent_id" class="col-sm-2 col-form-label">{{ __('Chuyên mục hiện tại') }} <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <select id="parent_id" class="form-control @error('parent_id') is-invalid @enderror" name="parent_id">
-                                    <option value="-1">Trống</option>
-                                    <option value="1">Chưa được phân loại</option>
+                                    <option value="">Trống</option>
+                                    @foreach ($categories as $catItem)
+                                        <option value="{{ $catItem->id }}" @if ($catItem->id == $category->parent_id) selected @endif>{{ $catItem->name }}</option>
+                                        @if ($catItem->categories)
+                                            @foreach ($catItem->categories as $child)
+                                                @include('category.child', ['child' => $child, 'parent' => '— '])
+                                            @endforeach
+                                        @endif
+                                    @endforeach
                                 </select>
 
                                 @error('parent_id')
@@ -50,6 +57,20 @@
                                 <small id="descHelp" class="form-text text-muted">Thông thường mô tả này không được sử dụng trong các giao diện, tuy nhiên có vài giao diện có thể hiển thị mô tả này.</small>
 
                                 @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="thumbnail" class="col-sm-2 col-form-label">{{ __('Ảnh') }}</label>
+                            <div class="col-sm-10">
+                                <input id="thumbnail" type="file" class="form-control-file @error('thumbnail') is-invalid @enderror" name="thumbnail" aria-describedby="thumbHelp">
+                                <small id="thumbHelp" class="form-text text-muted">The image size should be: 400 X 255</small>
+
+                                @error('thumbnail')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

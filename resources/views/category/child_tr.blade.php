@@ -1,5 +1,12 @@
 <tr>
     <th scope="row" class="text-center">{{ $child->id }}</th>
+    <td>
+        @if ($child->thumbnail != '')
+            <img src="{{ url('storage/thumbnails/' . $child->thumbnail) }}" width="50" class="img-thumbnail" alt="{{ $child->name }}">
+        @else
+            <img src="{{ url('images/noimage.jpg') }}" width="50" class="img-thumbnail" alt="{{ $child->name }}">
+        @endif
+    </td>
     <td>{{ $parent . $child->name }}</td>
     <td>{{ $child->description ?? '—' }}</td>
     <td>{{ $child->slug }}</td>

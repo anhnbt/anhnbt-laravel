@@ -15,6 +15,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">{{ __('Ảnh') }}</th>
                                 <th scope="col">{{ __('Tên') }}</th>
                                 <th scope="col">{{ __('Mô tả') }}</th>
                                 <th scope="col">{{ __('Chuỗi cho đường dẫn tĩnh') }}</th>
@@ -26,7 +27,14 @@
                         @foreach ($categories as $category)
                             <tr>
                                 <th scope="row" class="text-center">{{ $category->id }}</th>
-                                <td>{{ $category->name }}</td>
+                                <td>
+                                    @if ($category->thumbnail != '')
+                                        <img src="{{ url('storage/thumbnails/' . $category->thumbnail) }}" width="50" class="img-thumbnail" alt="{{ $category->name }}">
+                                    @else
+                                        <img src="{{ url('images/noimage.jpg') }}" width="50" class="img-thumbnail" alt="{{ $category->name }}">
+                                    @endif
+                                </td>
+                                <td class="font-weight-bold">{{ $category->name }}</td>
                                 <td>{{ $category->description ?? '—' }}</td>
                                 <td>{{ $category->slug }}</td>
                                 <td>{{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}</td>
