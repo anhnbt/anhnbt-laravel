@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use App\User;
 
@@ -114,12 +114,28 @@ class UserController extends Controller
                         ->withInput();
         }
 
+        if ($request->hasFile('avatar_url')) {
+            $fileNameWithExt = $request->file('avatar_url')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('avatar_url')->extension();
+            $fileNameToStore = $fileName . '-' . time() . '.' . $extension;
+            $path = $request->file('avatar_url')->storeAs(
+                'public/avatars', $fileNameToStore
+            );
+        }
+
         $user = User::findOrFail($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+        $user->birthday = $request->input('birthday');
+        $user->gender = $request->input('gender');
+        if ($request->hasFile('avatar_url')) {
+            $user->avatar_url = $fileNameToStore;
+        }
         $user->save();
 
-        return redirect()->route('users.show', $id)->with('success', 'Record updated successfully.');
+        return redirect()->route('users.edit', $id)->with('success', 'Record updated successfully.');
     }
 
     /**
@@ -130,7 +146,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id)->delete();
+        $user = User::findOrFail($id);
+        if ($user->avatar_url !== 'avatar-default.png') {
+            Storage::delete('public/avatars/' . $user->avatar_url);
+        }
+        $user->delete();
         return redirect()->route('users.index')->with('success', 'Record deleted successfully.');
     }
 }

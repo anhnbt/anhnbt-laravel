@@ -7,11 +7,11 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Sửa Hồ Sơ') }}: {{ $user->name }}
+                    {{ __('Hồ sơ') }}: {{ $user->name }}
                 </div>
                 <div class="card-body">
                     @auth
-                    <form method="POST" action="{{ route('users.update', $user->id) }}">
+                    <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
 
@@ -29,7 +29,7 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="email" class="col-form-label col-sm-2">{{ __('Địa chỉ Email') }}</label>
+                            <label for="email" class="col-form-label col-sm-2">{{ __('Địa chỉ Email') }} <span class="text-danger">(bắt buộc)</span></label>
                             <div class="col-sm-10">
                                 <input id="email" type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}" placeholder="Nhập email (Bắt buộc)" aria-describedby="emailHelp" required>
                                 <small id="emailHelp" class="form-text text-muted">Địa chỉ mà chúng tôi có thể liên hệ với bạn nếu tài khoản của bạn có hoạt động bất thường hoặc bị khóa.</small>
@@ -90,8 +90,26 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="avatar_url" class="col-sm-2 col-form-label">{{ __("Ảnh đại diện") }}</label>
+                            <div class="col-sm-10">
+                                @if ($user->avatar_url != '')
+                                    <img src="{{ url('storage/avatars/' . $user->avatar_url) }}" width="50" class="img-thumbnail mb-2" alt="{{ $user->name }}">
+                                @else
+                                    <img src="{{ url('images/avatar-default.png') }}" width="50" class="img-thumbnail mb-2" alt="{{ $user->name }}">
+                                @endif
+                                <input id="avatar_url" type="file" class="form-control-file @error('avatar_url') is-invalid @enderror" name="avatar_url">
+
+                                @error('avatar_url')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="col-sm-10 offset-2">
-                                <button type="submit" class="btn btn-primary">{{ __('Lưu') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Cập nhật hồ sơ') }}</button>
                                 <a href="{{ route('users.index') }}" class="btn btn-link" role="button">{{ __('Hủy') }}</a>
                             </div>
                         </div>
