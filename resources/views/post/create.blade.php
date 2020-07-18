@@ -29,9 +29,15 @@
                         <div class="form-group row">
                             <label for="category_id" class="col-sm-2 col-form-label">{{ __('Chuyên mục') }} <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
-                                <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror">
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <select id="category_id" class="form-control @error('category_id') is-invalid @enderror" name="category_id">
+                                    <option value="">Trống</option>
+                                    @foreach ($categories as $catItem)
+                                        <option value="{{ $catItem->id }}" @if ($catItem->id == old('category_id')) selected @endif>{{ $catItem->name }}</option>
+                                        @if ($catItem->categories)
+                                            @foreach ($catItem->categories as $childCategory)
+                                                @include('post.category', ['childCategory' => $childCategory, 'parent' => '— '])
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 </select>
 

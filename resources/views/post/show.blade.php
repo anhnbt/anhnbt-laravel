@@ -5,12 +5,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ $post->category->name }}</a></li>
-                </ol>
-            </nav>
+            @include('includes.breadcrumbs')
             <div class="card text-center">
                 <div class="position-relative">
                     <span class="badge badge-dark position-absolute p-2" style="bottom: 10px; left: 10px;"><i class="fas fa-eye"></i> {{ $post->views }}</span>

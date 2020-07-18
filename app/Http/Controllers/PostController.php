@@ -42,7 +42,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::whereNull('parent_id')
+                                ->with('categories')
+                                ->get();
         return view('post.create', ['categories' => $categories]);
     }
 
@@ -114,7 +116,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        $categories = Category::all();
+        $categories = Category::whereNull('parent_id')
+                                ->with('categories')
+                                ->get();
         if (Auth::id() !== $post->user_id) {
             return redirect()->route('posts.index')->with('error', 'Unauthorized page.');
         }

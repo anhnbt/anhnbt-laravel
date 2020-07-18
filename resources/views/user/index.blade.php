@@ -15,16 +15,24 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Ngày tạo</th>
-                                <th scope="col" colspan="2" class="text-center">Tác vụ</th>
+                                <th scope="col">{{ __('Ảnh') }}</th>
+                                <th scope="col">{{ __('Tên') }}</th>
+                                <th scope="col">{{ __('Email') }}</th>
+                                <th scope="col">{{ __('Ngày tạo') }}</th>
+                                <th scope="col" colspan="2" class="text-center">{{ __('Tác vụ') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach ($users as $user)
                             <tr>
                                 <th scope="row" class="text-center">{{ $user->id }}</th>
+                                <td>
+                                    @if ($user->avatar_url != '')
+                                        <img src="{{ url('storage/avatars/' . $user->avatar_url) }}" width="50" class="img-thumbnail" alt="{{ $user->name }}">
+                                    @else
+                                        <img src="{{ url('images/noimage.jpg') }}" width="50" class="img-thumbnail" alt="{{ $user->name }}">
+                                    @endif
+                                    </td>
                                 <td><a href="{{ route('users.show', $user->id) }}" class="font-weight-bold">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
                                 <td><i class="far fa-clock"></i> {{ Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</td>
@@ -46,7 +54,7 @@
                     </table>
                 {{ $users->links() }}
                 @else
-                <div class="alert alert-info" role="alert">No data found.</div>
+                <div class="alert alert-info" role="alert">{{ __('No data found.') }}</div>
                 @endif
                 </div><!-- .card-body -->
             </div><!-- .card -->

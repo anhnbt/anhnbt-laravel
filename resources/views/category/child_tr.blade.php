@@ -1,21 +1,21 @@
 <tr>
-    <th scope="row" class="text-center">{{ $child->id }}</th>
+    <th scope="row" class="text-center">{{ $childCategory->id }}</th>
     <td>
-        @if ($child->thumbnail != '')
-            <img src="{{ url('storage/thumbnails/' . $child->thumbnail) }}" width="50" class="img-thumbnail" alt="{{ $child->name }}">
+        @if ($childCategory->thumbnail != '')
+            <img src="{{ url('storage/thumbnails/' . $childCategory->thumbnail) }}" width="50" class="img-thumbnail" alt="{{ $childCategory->name }}">
         @else
-            <img src="{{ url('images/noimage.jpg') }}" width="50" class="img-thumbnail" alt="{{ $child->name }}">
+            <img src="{{ url('images/noimage.jpg') }}" width="50" class="img-thumbnail" alt="{{ $childCategory->name }}">
         @endif
     </td>
-    <td>{{ $parent . $child->name }}</td>
-    <td>{{ $child->description ?? '—' }}</td>
-    <td>{{ $child->slug }}</td>
-    <td>{{ Carbon\Carbon::parse($child->created_at)->diffForHumans() }}</td>
+    <td>{{ $parent . $childCategory->name }}</td>
+    <td>{{ $childCategory->description ?? '—' }}</td>
+    <td>{{ $childCategory->slug }}</td>
+    <td>{{ Carbon\Carbon::parse($childCategory->created_at)->diffForHumans() }}</td>
     <td class="text-center">
-        <form action="{{ route('categories.destroy', $child->id) }}" method="POST">
+        <form action="{{ route('categories.destroy', $childCategory->id) }}" method="POST">
             <div class="btn-group btn-group-sm" role="group">
-                <a href="{{ route('categories.show', $child->id) }}" class="btn btn-info text-white" role="button">{{ __('Xem') }}</a>
-                <a href="{{ route('categories.edit', $child->id) }}" class="btn btn-secondary" role="button">{{ __('Chỉnh sửa') }}</a>
+                <a href="{{ route('categories.show', $childCategory->id) }}" class="btn btn-info text-white" role="button">{{ __('Xem') }}</a>
+                <a href="{{ route('categories.edit', $childCategory->id) }}" class="btn btn-secondary" role="button">{{ __('Chỉnh sửa') }}</a>
                 @method('DELETE')
                 @csrf
 
@@ -24,8 +24,8 @@
         </form>
     </td>
 </tr>
-@if ($child->categories)
-    @foreach ($child->categories as $child)
-        @include('category.child_tr', ['child' => $child, 'parent' => $parent . "— "])
+@if ($childCategory->categories)
+    @foreach ($childCategory->categories as $child)
+        @include('category.child_tr', ['childCategory' => $child, 'parent' => $parent . "— "])
     @endforeach
 @endif

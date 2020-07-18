@@ -52,8 +52,8 @@
                                 </td>
                             </tr>
                             @if ($category->categories)
-                                @foreach ($category->categories as $child)
-                                    @include('category.child_tr', ['child' => $child, 'parent' => '— '])
+                                @foreach ($category->categories as $childCategory)
+                                    @include('category.child_tr', ['childCategory' => $childCategory, 'parent' => '— '])
                                 @endforeach
                             @endif
                         @endforeach

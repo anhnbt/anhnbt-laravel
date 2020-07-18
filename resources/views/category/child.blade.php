@@ -1,6 +1,6 @@
-<option value="{{ $child->id }}" @if ($child->id == $category->parent_id) selected @endif>{{ $parent . $child->name }}</option>
-@if ($child->categories)
-    @foreach ($child->categories as $child)
-        @include('category.child', ['child' => $child, 'parent' => $parent . "— "])
+<option value="{{ $childCategory->id }}" @if ($childCategory->id == $category->parent_id) selected @endif>{{ $parent . $childCategory->name }}</option>
+@if ($childCategory->categories)
+    @foreach ($childCategory->categories as $child)
+        @include('category.child', ['childCategory' => $child, 'parent' => $parent . "— "])
     @endforeach
 @endif

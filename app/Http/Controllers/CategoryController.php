@@ -113,8 +113,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $categories = Category::whereNull('parent_id')
                                 ->with('categories')
-                                ->orderBy('id', 'desc')
-                                ->paginate(10);
+                                ->get();
         return view('category.edit', ['category' => $category, 'categories' => $categories]);
     }
 

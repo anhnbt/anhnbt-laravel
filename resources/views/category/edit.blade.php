@@ -35,8 +35,8 @@
                                     @foreach ($categories as $catItem)
                                         <option value="{{ $catItem->id }}" @if ($catItem->id == $category->parent_id) selected @endif>{{ $catItem->name }}</option>
                                         @if ($catItem->categories)
-                                            @foreach ($catItem->categories as $child)
-                                                @include('category.child', ['child' => $child, 'parent' => '— '])
+                                            @foreach ($catItem->categories as $childCategory)
+                                                @include('category.child', ['childCategory' => $childCategory, 'parent' => '— '])
                                             @endforeach
                                         @endif
                                     @endforeach

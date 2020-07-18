@@ -45,7 +45,7 @@
                         <div class="form-group row">
                             <label for="phone_number" class="col-form-label col-sm-2">{{ __('Số điện thoại') }}</label>
                             <div class="col-sm-10">
-                                <input id="phone_number" type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror" value="{{ $user->phone_number }}" required>
+                                <input id="phone_number" type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror" value="{{ $user->phone_number }}">
 
                                 @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
                         <div class="form-group row">
                             <label for="birthday" class="col-form-label col-sm-2">{{ __('Ngày sinh') }}</label>
                             <div class="col-sm-10">
-                                <input id="birthday" type="text" name="birthday" class="form-control @error('birthday') is-invalid @enderror" value="{{ $user->birthday }}" placeholder="YYYY-MM-DD (VD: 1995-11-16)" required>
+                                <input id="birthday" type="text" name="birthday" class="form-control @error('birthday') is-invalid @enderror" value="{{ $user->birthday }}" placeholder="YYYY-MM-DD (VD: 1995-11-16)">
 
                                 @error('birthday')
                                     <span class="invalid-feedback" role="alert">
