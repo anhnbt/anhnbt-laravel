@@ -30,7 +30,7 @@ class RankController extends Controller
     public function index()
     {
         $ranks = DB::table('ranks')->orderBy('id', 'desc')->paginate(10);
-        return view('rank.index', ['ranks' => $ranks]);
+        return view('admin.rank.index', ['ranks' => $ranks]);
     }
 
     /**
@@ -40,7 +40,7 @@ class RankController extends Controller
      */
     public function create()
     {
-        return view('rank.create');
+        return view('admin.rank.create');
     }
 
     /**
@@ -101,7 +101,7 @@ class RankController extends Controller
      */
     public function show($id)
     {
-        return view('rank.show', ['rank' => Rank::findOrFail($id)]);
+        return view('admin.rank.show', ['rank' => Rank::findOrFail($id)]);
     }
 
     /**
@@ -112,7 +112,7 @@ class RankController extends Controller
      */
     public function edit($id)
     {
-        return view('rank.edit', ['rank' => Rank::findOrFail($id)]);
+        return view('admin.rank.edit', ['rank' => Rank::findOrFail($id)]);
     }
 
     /**

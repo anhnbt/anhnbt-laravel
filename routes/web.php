@@ -14,17 +14,13 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/', 'PageController@dashboard');
+Route::get('/', 'HomeController@index');
 Route::get('/about', 'PageController@about');
 Route::get('/services', 'PageController@services');
 
 Auth::routes();
-Route::prefix('admin')->group(function () {
 
+Route::prefix('admin')->group(function () {
     Route::resources([
         'categories' => 'CategoryController',
         'posts' => 'PostController',

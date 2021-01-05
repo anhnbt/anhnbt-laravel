@@ -32,7 +32,7 @@ class PostController extends Controller
     {
         // $posts = DB::table('posts')->orderBy('id', 'desc')->paginate(15);
         $posts = Post::orderBy('id', 'desc')->paginate(15);
-        return view('post.index', ['posts' => $posts]);
+        return view('admin.post.index', ['posts' => $posts]);
     }
 
     /**
@@ -45,7 +45,7 @@ class PostController extends Controller
         $categories = Category::whereNull('parent_id')
                                 ->with('categories')
                                 ->get();
-        return view('post.create', ['categories' => $categories]);
+        return view('admin.post.create', ['categories' => $categories]);
     }
 
     /**
@@ -104,7 +104,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->increment('views');
-        return view('post.show', ['post' => $post]);
+        return view('admin.post.show', ['post' => $post]);
     }
 
     /**
@@ -122,7 +122,7 @@ class PostController extends Controller
         if (Auth::id() !== $post->user_id) {
             return redirect()->route('posts.index')->with('error', 'Unauthorized page.');
         }
-        return view('post.edit', ['post' => $post, 'categories' => $categories]);
+        return view('admin.post.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**

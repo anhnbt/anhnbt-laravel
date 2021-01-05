@@ -33,7 +33,7 @@ class CategoryController extends Controller
                                 ->with('categories')
                                 ->orderBy('id', 'desc')
                                 ->paginate(10);
-        return view('category.index', ['categories' => $categories]);
+        return view('admin.category.index', ['categories' => $categories]);
     }
 
     /**
@@ -46,7 +46,7 @@ class CategoryController extends Controller
         $categories = Category::whereNull('parent_id')
                                 ->with('categories')
                                 ->get();
-        return view('category.create', ['categories' => $categories]);
+        return view('admin.category.create', ['categories' => $categories]);
     }
 
     /**
@@ -114,7 +114,7 @@ class CategoryController extends Controller
         $categories = Category::whereNull('parent_id')
                                 ->with('categories')
                                 ->get();
-        return view('category.edit', ['category' => $category, 'categories' => $categories]);
+        return view('admin.category.edit', ['category' => $category, 'categories' => $categories]);
     }
 
     /**

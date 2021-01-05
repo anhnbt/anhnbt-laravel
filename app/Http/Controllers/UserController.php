@@ -30,7 +30,7 @@ class UserController extends Controller
     public function index()
     {
         $users = DB::table('users')->orderBy('id', 'desc')->paginate(10);
-        return view('user.index', ['users' => $users]);
+        return view('admin.user.index', ['users' => $users]);
     }
 
     /**
@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('admin.user.create');
     }
 
     /**
@@ -80,7 +80,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('user.profile', ['user' => User::findOrFail($id)]);
+        return view('admin.user.profile', ['user' => User::findOrFail($id)]);
     }
 
     /**
@@ -91,7 +91,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('user.edit', ['user' => User::findOrFail($id)]);
+        return view('admin.user.edit', ['user' => User::findOrFail($id)]);
     }
 
     /**

@@ -21,7 +21,7 @@ class PageController extends Controller
                 ->where('user_id', $user_id)
                 ->orderBy('id', 'desc')
                 ->get();
-        return view('pages.dashboard', ['posts' => $posts]);
+        return view('admin.pages.dashboard', ['posts' => $posts]);
     }
 
     public function about() {
