@@ -49,16 +49,15 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                        <div class="btn-group btn-group-sm" role="group">
-                                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info text-white" role="button">{{ __('Xem') }}</a>
-                                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary" role="button">{{ __('Chỉnh sửa') }}</a>
-                                            @method('DELETE')
-                                            @csrf
-
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">{{ __('Xóa') }}</button>
-                                        </div>
-                                    </form>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{{ route('pages.show', $post->slug) }}" class="btn btn-info text-white" role="button">{{ __('Xem') }}</a>
+                                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary" role="button">{{ __('Chỉnh sửa') }}</a>
+                                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">{{ __('Xóa') }}</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

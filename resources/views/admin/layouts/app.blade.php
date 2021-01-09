@@ -94,7 +94,12 @@
     </div>
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
-    <script>tinymce.init({selector:'#tinymce_content'});</script>
+    <script>
+        tinymce.init({
+            selector : '#tinymce_content',
+            height : "480"
+        });
+    </script>
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()

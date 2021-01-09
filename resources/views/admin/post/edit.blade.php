@@ -36,7 +36,7 @@
                                         <option value="{{ $catItem->id }}" @if ($catItem->id == $post->category_id) selected @endif>{{ $catItem->name }}</option>
                                         @if ($catItem->categories)
                                             @foreach ($catItem->categories as $childCategory)
-                                                @include('post.category', ['childCategory' => $childCategory, 'parent' => '— '])
+                                                @include('admin.post.category', ['childCategory' => $childCategory, 'parent' => '— '])
                                             @endforeach
                                         @endif
                                     @endforeach
@@ -66,9 +66,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="content" class="col-sm-2 col-form-label">{{ __('Nội dung') }} <span class="text-danger">*</span></label>
+                            <label for="tinymce_content" class="col-sm-2 col-form-label">{{ __('Nội dung') }} <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
-                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" cols="30" rows="10" placeholder="Write something..." required>{{ $post->content }}</textarea>
+                                <textarea id="tinymce_content" class="form-control @error('content') is-invalid @enderror" name="content" cols="30" rows="10" placeholder="Write something..." required>{{ $post->content }}</textarea>
 
                                 @error('content')
                                     <span class="invalid-feedback" role="alert">

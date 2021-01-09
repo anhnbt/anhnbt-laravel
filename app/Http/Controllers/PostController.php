@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -21,6 +22,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+        // $this->authorizeResource(Post::class, 'post');
     }
     
     /**
@@ -56,10 +58,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // if ($request->user()->cannot('create', Post::class)) {
+        //     abort(403);
+        // }
+
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|unique:posts|max:55',
+            'description' => 'nullable|max:150',
+            'category_id' => 'required',
             'content' => 'required',
-            'thumbnail' => 'image|nullable:max:2048',
+            'thumbnail' => 'image|nullable|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -104,6 +112,14 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->increment('views');
+        // Người dùng hiện tại
+        $user = Auth::user();
+        
+        if ($user->can('view', $post)) {
+            echo "Người dùng được quyền xem";
+        } else {
+            echo 'Người dùng không được quyền xem.';
+        }
         return view('admin.post.show', ['post' => $post]);
     }
 
@@ -119,10 +135,14 @@ class PostController extends Controller
         $categories = Category::whereNull('parent_id')
                                 ->with('categories')
                                 ->get();
-        if (Auth::id() !== $post->user_id) {
+        // if (Auth::id() !== $post->user_id) {
+        //     return redirect()->route('posts.index')->with('error', 'Unauthorized page.');
+        // }
+        if (Gate::allows('update-post', $post)) {
+            return view('admin.post.edit', ['post' => $post, 'categories' => $categories]);
+        } else {
             return redirect()->route('posts.index')->with('error', 'Unauthorized page.');
         }
-        return view('admin.post.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
@@ -134,8 +154,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255',
+            'title' => 'required|max:55',
+            'description' => 'nullable|max:150',
+            'category_id' => 'required',
             'content' => 'required',
             'thumbnail' => 'image|nullable|max:2048',
         ]);
@@ -167,6 +190,11 @@ class PostController extends Controller
             $post->thumbnail = $fileNameToStore;
         }
         $post->status = $request->input('status');
+
+        if ($request->user()->cannot('update', $post)) {
+            abort(403);
+        }
+
         $post->save();
 
         return redirect()->route('posts.edit', $id)->with('success', 'Record updated successfully.');

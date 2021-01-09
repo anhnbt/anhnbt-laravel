@@ -26,6 +26,6 @@
 </tr>
 @if ($childCategory->categories)
     @foreach ($childCategory->categories as $child)
-        @include('category.child_tr', ['childCategory' => $child, 'parent' => $parent . "— "])
+        @include('admin.category.child_tr', ['childCategory' => $child, 'parent' => $parent . "— "])
     @endforeach
 @endif

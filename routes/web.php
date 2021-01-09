@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::get('/about', 'PageController@about');
-Route::get('/services', 'PageController@services');
-
 Auth::routes();
+Route::redirect('/ky-tu-dac-biet', '/vi-vn/ki-tu-dac-biet.html', 301);
+Route::get('/vi-vn/{slug}.html', 'PageController@show')
+    ->where('slug', '[A-Za-z0-9-]+')
+    ->name('pages.show');
+Route::get('/', 'HomeController@index');
 
 Route::prefix('admin')->group(function () {
     Route::resources([

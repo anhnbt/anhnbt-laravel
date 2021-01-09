@@ -53,7 +53,7 @@
                             </tr>
                             @if ($category->categories)
                                 @foreach ($category->categories as $childCategory)
-                                    @include('category.child_tr', ['childCategory' => $childCategory, 'parent' => '— '])
+                                    @include('admin.category.child_tr', ['childCategory' => $childCategory, 'parent' => '— '])
                                 @endforeach
                             @endif
                         @endforeach

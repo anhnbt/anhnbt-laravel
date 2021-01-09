@@ -35,7 +35,7 @@
                                         <option value="{{ $catItem->id }}" @if ($catItem->id == old('category_id')) selected @endif>{{ $catItem->name }}</option>
                                         @if ($catItem->categories)
                                             @foreach ($catItem->categories as $childCategory)
-                                                @include('post.category', ['childCategory' => $childCategory, 'parent' => '— '])
+                                                @include('admin.post.category', ['childCategory' => $childCategory, 'parent' => '— '])
                                             @endforeach
                                         @endif
                                     @endforeach

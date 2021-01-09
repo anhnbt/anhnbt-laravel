@@ -8,6 +8,8 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('Sửa Hồ Sơ') }}: {{ $user->name }}
+                    {{ $user }}<br><br> 
+                    {{ $user->roles }}
                 </div>
                 <div class="card-body">
                     @auth

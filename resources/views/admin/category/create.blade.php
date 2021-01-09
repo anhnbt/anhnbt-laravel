@@ -35,7 +35,7 @@
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @if ($category->categories)
                                             @foreach ($category->categories as $childCategory)
-                                                @include('category.child', ['childCategory' => $childCategory, 'parent' => '— '])
+                                                @include('admin.category.child', ['childCategory' => $childCategory, 'parent' => '— '])
                                             @endforeach
                                         @endif
                                     @endforeach
