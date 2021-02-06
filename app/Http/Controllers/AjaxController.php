@@ -12,7 +12,10 @@ class AjaxController extends Controller
         $symbolRight = strip_tags($request->symbolRight);
         $symbolCenter = strip_tags($request->symbolCenter);
         if (empty($myName) || $myName == "") {
-            $data = "Ô nhập tên không được bỏ trống!";
+            return response()->json([
+                'data' => 'Ô nhập tên không được bỏ trống!',
+                'status' => 'error'
+            ], 200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         } else {
             $myName = str_replace(' ', ' ', $myName);
             if (isset($symbolCenter) && ($symbolCenter != "")) {
@@ -144,21 +147,27 @@ class AjaxController extends Controller
                 $normalTen = substr($normalTen, 0, (strlen($normalTen) - 4) + 2) . $iam_text[1] . substr($normalTen, (strlen($normalTen) - 4) + 2);
                 $normalTen = substr($normalTen, 0, (strlen($normalTen) - 4) + 3) . $iam_text[2] . substr($normalTen, (strlen($normalTen) - 4) + 3);
             }
-            $data = [];
+            $simpleName = [];
+            $beautifulName = [];
             for ($i = 1; $i <= count($namePro); $i++) {
                 $convertName = $randLeftSymbol[$rand+$i] . str_replace($charsPro, $namePro[$i], $myName) . $randRightSymbol[$rand+$i];
-                array_push($data, $convertName);
+                array_push($beautifulName, $convertName);
             }
             if (strlen($myName) > 5) {
-                array_push($data, $randLeftSymbol[$rand] . $normalTen . $randRightSymbol[$rand]);
+                array_push($beautifulName, $randLeftSymbol[$rand] . $normalTen . $randRightSymbol[$rand]);
             }
             for ($i = 1; $i <= count($symbols); $i++) {
                 $convertName = str_replace($chars, $symbols[$i], strtolower($myName));
-                array_push($data, $convertName);
+                array_push($simpleName, $convertName);
             }
+
+            return response()->json([
+                'data' => [
+                    'beautiful' => $beautifulName,
+                    'simple' => $simpleName,
+                ],
+                'status' => 'OK'
+            ], 200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         }
-        return response()->json([
-            'data' => $data
-        ], 200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }

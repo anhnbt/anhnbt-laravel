@@ -233,7 +233,7 @@
                 <button type="submit" class="button button-primary u-full-width" id="ajaxButton" onclick="toPerfectName(this); return false;">Tạo tên kí tự đặc biệt</button>
                 </fieldset>
             </form>
-            <div id="result" class="card text-dark bg-light mb-3"></div>
+            <div id="result" class="card bg-light p-1"></div>
             <details open="">
                 <summary class="text-primary">Lưu ý khi đặt tên</summary>
                 <ul>
