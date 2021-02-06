@@ -84,8 +84,6 @@ class PostController extends Controller
             $path = $request->file('thumbnail')->storeAs(
                 'public/thumbnails', $fileNameToStore
             );
-        } else {
-            $fileNameToStore = 'noimage.jpg';
         }
 
         $post = new Post;
@@ -95,7 +93,9 @@ class PostController extends Controller
         $post->slug = Str::of($request->input('title'))->slug('-');
         $post->description = $request->input('description');
         $post->content = $request->input('content');
-        $post->thumbnail = $fileNameToStore;
+        if ($request->hasFile('thumbnail')) {
+            $post->thumbnail = $fileNameToStore;
+        }
         $post->status = $request->input('status');
         $post->save();
 

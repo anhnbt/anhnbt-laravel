@@ -20,6 +20,8 @@ Route::get('/vi-vn/{slug}.html', 'PageController@show')
     ->where('slug', '[A-Za-z0-9-]+')
     ->name('pages.show');
 Route::get('/', 'HomeController@index');
+Route::get('/vi-vn/ki-tu-dac-biet', 'PageController@ktdb');
+Route::post('/ajax-get-perfect-name', 'AjaxController@index');
 
 Route::prefix('admin')->group(function () {
     Route::resources([

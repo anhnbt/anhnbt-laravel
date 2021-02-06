@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         // $posts = App\Models\Post::where('active', 1)
-        $posts = Post::where('status', 'draft')
+        $posts = Post::where('status', 'published')
                ->orderBy('id', 'desc')
                ->take(10)
                ->get();

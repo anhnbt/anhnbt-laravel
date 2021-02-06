@@ -11,11 +11,6 @@ use App\Post;
 
 class PageController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
-
     public function show($slug) {
         $post = Post::where('slug', $slug)->first();
         if (is_null($post)) {
@@ -34,9 +29,9 @@ class PageController extends Controller
         return view('admin.pages.dashboard', ['posts' => $posts]);
     }
 
-    public function about() {
-        $title = "About Us";
-        return view('pages.about')->with('title', $title);
+    public function ktdb() {
+        $title = "Kí tự đặc biệt";
+        return view('web.pages.ktdb')->with('title', $title);
     }
 
     public function services() {
