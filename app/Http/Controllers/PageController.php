@@ -30,7 +30,7 @@ class PageController extends Controller
     }
 
     public function ktdb() {
-        $title = "Kí tự đặc biệt";
+        $title = "KÍ TỰ ĐẶC BIỆT ANHNBT - #1 Công cụ tạo tên game Mobile";
         return view('web.pages.ktdb')->with('title', $title);
     }
 

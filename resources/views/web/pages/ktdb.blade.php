@@ -1,20 +1,17 @@
 @extends('web.layout')
 
+@section('title', $title)
 @section('content')
 <div class="container">
     <div class="row">
         <div class="eight columns">
 <article>
         <header>
-            <h1>Ký tự đặc biệt</h1>
-            <div class="entry-meta">
-                <div class="media-left">
-                    <img width="40" height="40" src="./images/anhnbt.jpg" alt="Nguyễn Bá Tuấn Anh Avatar">
-                </div>
-                <div class="media-body">
-                    <div class="media-heading theauthor"><a href="https://www.facebook.com/anhnbtdotcom" target="_blank" rel="noopener noreferrer nofollow">Nguyễn Bá Tuấn Anh</a></div>
-                    <div>Cập nhật ngày <time datetime="2021-01-19">19 tháng 1 2021</time></div>
-                </div>
+            <h1>Kí tự đặc biệt</h1>
+            <div class="u-cf u-full-width">
+                <img width="40" height="40" src="{{ asset('images/anhnbt.jpg') }}" class="u-pull-left mr-1 avatar" alt="Nguyễn Bá Tuấn Anh Avatar">
+                <a href="https://www.facebook.com/anhnbtdotcom" target="_blank" rel="noopener noreferrer nofollow">Nguyễn Bá Tuấn Anh</a>
+                <div><time datetime="2021-01-19">19 tháng 1 2021</time></div>
             </div>
         </header>
         <div class="entry-content">
@@ -25,7 +22,7 @@
                 <li><a href="/p/trang-tri-van-ban-hoac-tieu-su-facebook.html"><span class="badge bg-primary">Facebook</span> Mẫu trang trí tiểu sử</a></li>
                 <li><a href="/p/nhung-cau-hoi-thuong-gap-faq.html"><span class="badge bg-warning text-dark">FAQ</span> Câu hỏi thường gặp</a></li>
             </ul>
-            <form method="POST">
+            <form method="POST" onsubmit="toPerfectName(); return false;">
                 <fieldset class="card bg-light p-1">
                     <legend>Công cụ tạo tên kí tự</legend>
                 <label for="myName">Nhập tên của bạn: </label>
@@ -230,12 +227,12 @@
                             </select>
                     </div>
                 </div>
-                <button type="submit" class="button button-primary u-full-width" id="ajaxButton" onclick="toPerfectName(this); return false;">Tạo tên kí tự đặc biệt</button>
+                <button type="submit" class="button button-primary u-full-width">Tạo tên kí tự đặc biệt</button>
                 </fieldset>
             </form>
-            <div id="result" class="card bg-light p-1"></div>
-            <details open="">
-                <summary class="text-primary">Lưu ý khi đặt tên</summary>
+            <div id="result" class="card bg-light p-1 mb-1">Kết quả hiển thị ở đây</div>
+            <details open="" class="card-note">
+                <summary class="text-primary"><strong>Lưu ý khi đặt tên</strong></summary>
                 <ul>
                     <li>Độ dài dưới 12 <em>kí tự đặc biệt</em></li>
                     <li>Không chứa từ ngữ nhạy cảm hoặc bị cấm</li>
@@ -247,7 +244,7 @@
                 <p><a href="ki-tu/mat-nguy-hiem.html">╰‿╯</a><a href="ki-tu/gk-funky.html">ĜKヽ</a><a href="ki-tu/top1.html">Ťøp❶</a><a href="ki-tu/pro.html">Prø丶</a><a href="ki-tu/ga.html">➻❥Ğà</a><a href="ki-tu/king.html">Ƙiйɠツ</a><a href="ki-tu/boss.html">ßσss™</a><a href="ki-tu/star-2.html">Štār☆</a><a href="ki-tu/mvp.html">ɱ√ρ︵</a><a href="ki-tu/qd.html">༄༂QĐ乛</a><a href="ki-tu/vn.html">VŇ•</a><a href="ki-tu/clear.html">ミÇlєαr</a><a href="ki-tu/sml.html">ŠM£✿</a><a href="ki-tu/ae.html">AE☞</a><a href="ki-tu/club.html">»Člub</a><a href="ki-tu/ff.html">︵₣F•</a><a href="ki-tu/top.html">๖ۣۜŤOP✮</a><a href="ki-tu/team.html">Ťëaɱᴭ</a><a href="ki-tu/crush.html">๖₢ush</a></p>
                 <h2 id="related">Tên hay nhất cho Liên Quân</h2>
                 <div class="alert text-normal" role="alert">Một số ký tự hay ký hiệu trên trang web này yêu cầu hệ điều hành Android 6.0 và iOS 10.0 trở lên.</div>
-                <div class="fb-comments" data-href="https://anhnbt.com/ky-tu-dac-biet" data-numposts="5" data-width="100%" data-order-by="reverse_time"></div>
+                <!-- <div class="fb-comments" data-href="https://anhnbt.com/ky-tu-dac-biet" data-numposts="5" data-width="100%" data-order-by="reverse_time"></div> -->
             </section>
             <section class="all-symbols">
                 <div class="mb-2">
@@ -260,9 +257,9 @@
                 <h3>Những ký tự đẹp trong FF</h3>
                 <div class="text-center">
                     <picture>
-                        <source media="(max-width: 799px)" srcset="./images/ki-tu-dac-biet-anhnbt-480w.jpg">
-                        <source media="(min-width: 800px)" srcset="./images/ki-tu-dac-biet-anhnbt.jpg">
-                        <img width="480" height="270" src="./images/ki-tu-dac-biet-anhnbt.jpg" alt="Kí tự đặc biệt" class="responsive-image" loading="lazy">
+                        <source media="(max-width: 799px)" srcset="{{ asset('images/ki-tu-dac-biet-anhnbt-480w.jpg') }}">
+                        <source media="(min-width: 800px)" srcset="{{ asset('images/ki-tu-dac-biet-anhnbt.jpg') }}">
+                        <img width="480" height="270" src="{{ asset('images/ki-tu-dac-biet-anhnbt.jpg') }}" alt="Kí tự đặc biệt" class="responsive-image" loading="lazy">
                     </picture>
                 </div>
                 <p>Kí tự tàng hình trong game Freefire: ❍ ❏ ❐ ❑ ❒</p>
@@ -274,7 +271,7 @@
                 <p>Ⓐ ✍ ✎ © ® ™ Σ ✿ ⚑ 웃 유 ℂ ℍ ℕ ℙ ℚ ℝ ℤ ℬ ℰ ℯ ℱ ℊ ℋ ℎ ℐ ℒ ℓ ℳ ℴ ℘ ℛ ℭ ℮ ℌ ℑ ℜ ℨ</p>
                 <p class="text-normal"><strong>1001 kí tự đặc biệt</strong> không thể tổng hợp hết vào trong bài viết này. Nếu bạn không tìm được ký tự mong muốn; Bạn có thể tìm hiểu thêm trên <a href="https://kitudacbiet.com/" target="_blank" rel="noopener noreferrer nofollow">kítudacbiet.com</a> và <a href="https://kitudacbiet.com.vn/" target="_blank" rel="noopener noreferrer nofollow">kitudacbiet.com.vn</a> hoặc nhắn tin cho mình để được hỗ trợ riêng nhé!</p>
                 <figure>
-                    <img width="476" height="507" src="./images/character-map-windows-10.png" alt="Character Map Windows 10" class="responsive-image" loading="lazy">
+                    <img width="476" height="507" src="{{ asset('images/character-map-windows-10.png') }}" alt="Character Map Windows 10" class="responsive-image" loading="lazy">
                     <figcaption class="text-center">Character Map Windows 10.</figcaption>
                 </figure>
                 <p class="text-normal">Ngoài ra, bạn có thể lấy được rất nhiều ký tự có sẵn trên Windows 10 có tên là <strong>Character Map</strong>. Chỉ cần vài thao tác Chọn (Select); Sao chép (Copy) và <kbd>Ctrl</kbd> + <kbd>V</kbd> (Paste) trên máy tính là có thể sử dụng được.</p>
@@ -393,8 +390,14 @@
         </div><!-- .entry-content -->
     </article>
         </div><!-- /.eight columns -->
-        <aside class="four columns">
-            hello what your name
+        <aside class="four columns sticky">
+            <div class="card mb-1">
+            <img src="{{ asset('images/ki-tu-dac-biet-anhnbt.jpg') }}" class="u-full-width">
+                <div class="card-body">
+                    <h4><strong>Nguyễn Bá Tuấn Anh</strong></h4>
+                    <p>Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with you.</p>
+                </div>
+            </div>
         </aside>
     </div><!-- /.row -->
 </div><!-- /.container -->
