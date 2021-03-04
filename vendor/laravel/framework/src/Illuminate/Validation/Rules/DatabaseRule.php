@@ -62,18 +62,22 @@ trait DatabaseRule
             return $table;
         }
 
-        $model = new $table;
+        if (is_subclass_of($table, Model::class)) {
+            $model = new $table;
 
-        return $model instanceof Model
-                ? $model->getTable()
-                : $table;
+            return implode('.', array_map(function (string $part) {
+                return trim($part, '.');
+            }, array_filter([$model->getConnectionName(), $model->getTable()])));
+        }
+
+        return $table;
     }
 
     /**
      * Set a "where" constraint on the query.
      *
      * @param  \Closure|string  $column
-     * @param  array|string|null  $value
+     * @param  array|string|int|null  $value
      * @return $this
      */
     public function where($column, $value = null)
@@ -192,7 +196,11 @@ trait DatabaseRule
     protected function formatWheres()
     {
         return collect($this->wheres)->map(function ($where) {
-            return $where['column'].','.'"'.str_replace('"', '""', $where['value']).'"';
+            if (is_bool($where['value'])) {
+                return $where['column'].','.($where['value'] ? 'true' : 'false');
+            } else {
+                return $where['column'].','.'"'.str_replace('"', '""', $where['value']).'"';
+            }
         })->implode(',');
     }
 }
